@@ -69,42 +69,70 @@
 
 <!-- Estilo -->
 <style>
-    #conteiner h1{
-        font-size: 35px;
-        display: inline-block;
+    /* Estilo para el contenedor de la sección */
+    .menu-area {
+        background-color: #f9f9f9; /* Un fondo gris muy claro para que resalte la tarjeta */
+        padding: 60px 0;
     }
-    .btn_new{
-        display: inline-block;
-        background: #239baa;
-        color: #fff;
-        padding: 5px 25px;
-        border-radius: 4px;
-        margin: 20px;
+
+    /* Tarjeta blanca centrada */
+    #bill_info {
+        background: #ffffff;
+        max-width: 600px; /* Ancho máximo para que no se estire de más */
+        margin: 0 auto;
+        padding: 40px;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.05); /* Sombra suave profesional */
     }
-    table{
-        border-collapse: collapse;
-        font-size: 12px;
-        font-family: "arial";
-        text-align: center;
+
+    /* Título "Información Personal" */
+    #h2 {
+        font-family: "Poppins", sans-serif;
+        font-weight: 700;
+        color: #333;
+        margin-bottom: 30px;
+        position: relative;
+    }
+
+    /* Ajustes a la Tabla para que no parezca tabla */
+    table {
         width: 100%;
-        margin: 25px;
+        border-collapse: collapse;
+        font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        font-size: 15px;
+        margin: 0; /* Quitamos el margen de 25px que tenías */
     }
-    table th{
+
+    /* Filas de la tabla */
+    table tr {
+        border-bottom: 1px solid #eee; /* Línea divisoria sutil */
+        transition: background 0.3s;
+    }
+
+    table tr:last-child {
+        border-bottom: none;
+    }
+
+    table tr:hover {
+        background-color: #fcfcfc;
+    }
+
+    /* Celdas de etiquetas (Nombre, Apellido, etc.) */
+    table td:first-child {
         text-align: left;
-        padding: 10px;
-        background: #3d7ba8;
-        color: #fff;
+        color: #888;
+        font-weight: 600;
+        text-transform: uppercase;
+        font-size: 13px;
+        padding: 18px 10px;
+        width: 40%;
     }
-    table tr:nth-child(odd){
-        background: #f0f5f5;
-    }
-    table td{
-        padding: 10px; 
-    }
-    .link_edit{
-        color: #0ca4ce;
-    }
-    .link_delete{
-        color: #f26b6b;
+
+    /* Celdas de datos */
+    table td:last-child {
+        text-align: right;
+        color: #222;
+        font-weight: 500;
+        padding: 18px 10px;
     }
 </style>
