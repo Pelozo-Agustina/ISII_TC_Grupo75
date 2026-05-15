@@ -1,127 +1,111 @@
+/* Estilo para pagina de reservar mesa */
 
-/*Estilo para pagina de reservar mesa*/
+/* Fuentes: Roboto para cuerpo y una más elegante si deseas para títulos después */
+@import url('https://googleapis.com');
 
-
-/*FUENTES*/
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
-
-
-
-
-
-*{
-    margin: 0px;
-    padding: 0px;
+* {
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
 }
 
-
-/*TITULOS DE LA PAGINA*/
-
-#titulo-1reserva{
-    text-align: center;
-    margin-top: 100px;
-    margin-bottom: 5px;
-}
-
-#titulo-2reserva{
-    text-align: center;
-    margin-bottom: 25px;
+body {
+    background-color: #fcf9f5; /* Un blanco hueso muy suave */
     font-family: 'Roboto', sans-serif;
 }
 
-
-/*CONTENEDOR PRINCIPAL*/
-
-.contenedor-principal-reserva{
-    width: 100%;
-    height: 340px;
-    background-color: rgb(191, 234, 247);
-    
-    /*Flexbox*/
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    padding: 20px 60px;
-}
-
-
-/*Contenedor formulario*/
-.conteiner-form-reserva{
-    border-radius: 15px;
-    background-color: rgb(241, 241, 221);
-    color: black;
-    width: 450px;
-    height: auto;
-    padding: 25px 40px;
-    margin-top: 20px; 
-} 
-  
-
-/* formulario */
-
-#formulario-re{
- 
-    padding: 10px 10px;
-}
-
-#option_carts{
-    width: 150px;
-    height: 35px;
-    border: none;
-    border-radius: 5px;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* Boton confirmar reserva*/
-
-#btn_confirmar_reserva{
-    border-radius: 10px;
-    color: white;
-    font-size: 17px;
-    font-weight: bolder;
+/* TITULOS DE LA PAGINA */
+#titulo-1reserva {
+    text-align: center;
+    color: #4a3428;
+    font-weight: 700;
     margin-top: 20px;
+}
+
+#titulo-2reserva {
     text-align: center;
-    
+    margin-bottom: 30px;
+    color: #8d6e63;
+    font-weight: 300;
 }
 
-#btn_confirmar_reserva:hover{
-    background-color: green;
-    color: white;
+/* CONTENEDOR PRINCIPAL */
+.contenedor-principal-reserva {
+    width: 100%;
+    min-height: 450px;
+    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+                url('https://unsplash.com'); /* Imagen de café de fondo */
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
 }
 
+/* Contenedor formulario */
+.conteiner-form-reserva {
+    border-radius: 20px;
+    background-color: rgba(255, 255, 255, 0.95); /* Blanco con ligera transparencia */
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2); /* Sombra para dar profundidad */
+    width: 100%;
+    max-width: 450px;
+    padding: 40px;
+} 
 
-/*campo datos*/
+/* Formulario */
+#formulario-re {
+    display: flex;
+    flex-direction: column;
+}
 
-.campo-datos{
-    width: 180px;
-    height: 40px;
-    border: none;
-    border-radius: 5px;
-    margin-bottom: 20px;
+#labels {
     font-size: 15px;
-    padding-left: 10px;
+    color: #5d4037;
+    font-weight: bold;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
+.campo-datos, #option_carts {
+    width: 100%;
+    height: 45px;
+    border: 1px solid #d7ccc8;
+    border-radius: 8px;
+    margin-bottom: 25px;
+    font-size: 16px;
+    padding: 0 15px;
+    background-color: #fff;
+    transition: all 0.3s ease;
+}
 
-#labels{
-    font-size: 17px;
-    color: black;
-    font-family: 'Roboto', sans-serif;
-    margin-bottom: 7px;
-    
+.campo-datos:focus, #option_carts:focus {
+    outline: none;
+    border-color: #6d4c41;
+    box-shadow: 0 0 5px rgba(109, 76, 65, 0.2);
+}
+
+/* Boton confirmar reserva */
+#btn_confirmar_reserva {
+    background-color: #6d4c41; /* Color café */
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    text-transform: uppercase;
+}
+
+#btn_confirmar_reserva:hover {
+    background-color: #4e342e;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+#btn_confirmar_reserva:active {
+    transform: translateY(0);
 }
