@@ -16,7 +16,7 @@ class Carrito_model extends CI_Model {
 		return (isset($id)) ? $id : FALSE;
 	}
 	
-	public function insert_venta_detalle($data)
+	public function insert_ventas_detalle($data)
 	{
 		$this->db->insert('ventas_detalle', $data);
 	}
