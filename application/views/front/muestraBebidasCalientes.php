@@ -14,7 +14,7 @@
 
 	<div class="container">
 		<div class="well">
-			<h1>No hay Bebidas Calientes</h1>
+			<h1>No hay productos disponibles para esta categoria actualmente</h1>
 		</div>
 
 		<?php if( ($this->session->userdata('login_in')) and ($session_data['perfil_id'] =='1') ) { ?>

@@ -67,6 +67,7 @@
             <br> 
             <?php echo form_submit('confirmar', 'Confirmar',"class='btn btn-lg btn-primary'"); ?> 
             <br> <br>
+
         </div>
         <?php echo form_close(); ?>
        

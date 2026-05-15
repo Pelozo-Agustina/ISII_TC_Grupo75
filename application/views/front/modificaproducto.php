@@ -2,9 +2,11 @@
 <div class="col-sm-12 col-md-12">
 	<div class="well">
 		<br>
-		<?php  { ?>
-            <a type="button" class="btn btn-success" href="<?php echo base_url('productos_todos'); ?>">Atras</a>
-            <?php } ?>
+		<a href="<?php echo base_url('productos_todos'); ?>" 
+   			class="btn" 
+   			style="background-color: #4b3621; border: none; color: white; padding: 10px 30px; font-size: 16px; font-weight: bold; border-radius: 5px;">
+   				<i class="fa fa-arrow-left"></i> Atrás
+		</a>
 		<center><h1>Modificar Datos</h1>	
 		<h6> <b>Acepta imagenes gif, jpg, jpeg, png</b></h6>
 		<h6> <b>Tamaño maximo de la imagen 2MB</b></h6></center>	
@@ -15,7 +17,7 @@
 		<div class="row">
 	   		<div class="col-md-6">
 				<div class="form-group">
-					<?php echo form_label('Descripcion:', 'descripcion'); ?>
+					<?php echo form_label('Descripcion:', 'descripcion',); ?>
 					<?php echo form_input(['name' => 'descripcion', 
 													'id' => 'descripcion', 
 													'class' => 'form-control',
@@ -101,18 +103,11 @@
 													'class' => 'form-control']); ?> 
 					<?php echo form_error('filename'); ?>
 					<br>
-					<?php echo form_submit('modificar', 'Modificar',"class='btn btn-lg btn-warning btn-block'"); ?>
+					<?php echo form_submit('modificar', 'Guardar Cambios', "class='btn btn-warning btn-lg' style='padding: 10px 30px; font-size: 1.5rem; width: auto; margin: 0 auto; display: block;'"); ?>
+
 				</div>		
 			</div>
 		</div>
 	<?php echo form_close(); ?>
 </div>
 </div>
-
-
-<style>
-	.container1{  
-		  border: 15px SteelBlue dashed;
-		  border-radius: 10px 5px 10px 5px;
-	}
-</style>

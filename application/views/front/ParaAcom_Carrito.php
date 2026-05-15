@@ -56,7 +56,7 @@
 		                <?php
 		                        $btn = array(
 		                            'class' => 'btn btn-primary',
-		                            'value' => 'Comprar',
+		                            'value' => 'Añadir al Carrito',
 		                            'name' => 'action'
 		                        	);
 		                        
