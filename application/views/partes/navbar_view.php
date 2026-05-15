@@ -32,7 +32,7 @@
 				          <li class="menu-active"><a href="<?php echo base_url('#home');?>">Inicio</a></li>
 				          <li class="menu-has-children"><a href="<?php echo base_url('#');?>">Productos</a>
 				          	<ul>
-				          		<li><a href="<?php echo base_url('cargar_producto');?>">Cargar Producto</a></li>
+				          		<li><a href="<?php echo base_url('cargar_producto');?>">Agregar Producto</a></li>
 				          		<li><a href="<?php echo base_url('productos_todos');?>">Modificar Producto</a></li>
 				          		<li><a href="<?php echo base_url('productos_todos');?>">Eliminar Producto</a></li>
 				          		<li><a href="<?php echo base_url('productos_eliminados');?>">Productos Eliminados</a></li>
@@ -50,7 +50,10 @@
 				          <!--Reservas-->
 				          <li class="menu-has-children"><a href="<?php echo base_url('#');?>">Reservas</a>
 				          	<ul>
+				          		<!--
 				              <li><a href="<?php echo base_url('reservasCanceladas');?>">Reservas Canceladas</a></li>
+				          		-->
+				              <li><a href="<?php echo base_url('reservasConfirmadas');?>">Reservas Confirmadas</a>
 				              <li><a href="<?php echo base_url('muestraReservas');?>">Todas las Reservas</a></li>
 				            </ul>
 				          </li>
@@ -92,7 +95,7 @@
 				              <li><a href="<?php echo base_url('ParaAcom');?>">Para Acompañar</a></li>
 				            </ul>
 				        </li>
-						<li><a href="<?php echo base_url('hacer_reserva');?>">Hacer Reserva</a></li>
+						<li><a href="<?php echo base_url('realizar_reserva');?>">Realizar Reserva</a></li>
 						
 
 				        <li class="menu-has-children"><a href="<?php echo base_url('#');?>">Mi Cuenta</a>
