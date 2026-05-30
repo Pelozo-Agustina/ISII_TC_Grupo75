@@ -1,98 +1,127 @@
 <?php 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class LoginController extends CI_Controller{
+// ─── PASO 1: INTERFAZ Y ESTRATEGIAS DE REDIRECCIÓN ────────────────
+interface LoginStrategy {
+    public function redirigir();
+}
 
-	function __construct() 
-	{
-		parent::__construct();
-		$this-> load->model('loginModel');	
-	}
+class AdminLoginStrategy implements LoginStrategy {
+    public function redirigir() {
+        redirect('productos_todos', 'refresh');
+    }
+}
 
-	function index()
-	{   //Reglas de validación
-		$this->form_validation->set_rules('usuario', 'Usuario', 'trim|required');
-		$this->form_validation->set_rules('pass', 'pass','trim|required|callback__valid_login');
-		
-		//Mensajes en caso de error
-		$this->form_validation->set_message('required', 'el campo %s es requerido');
-		$this->form_validation->set_message('_valid_login', 'El usuario o contraseña son incorrectos');
-		$this->form_validation->set_message('is_unique', 'El campo %s ya existe');
-		
-		//Forma en que muestra los mensajes de error
-		$this->form_validation->set_error_delimiters('<ul><li>', '</li></ul>');
-		
-		if ($this->form_validation->run() == FALSE)
-		{	//En caso de que falle la validacion vuelve a cargar la pagina de Login
-			$data = array('titulo' => 'Error de datos');
-			$this->load->view('login');
-			$this->load->view('partes/head_view',$data);
-			$this->load->view('partes/navbar_view');
-			$this->load->view('partes/footer_view');
-		}
-		else{
-			//Pagina que carga despues de loguearse
-			//redirect(current_url()); ---> Vuelve a la pagina que estaba antes de loguearse
-			redirect(base_url('Welcome'));
+class ClienteLoginStrategy implements LoginStrategy {
+    public function redirigir() {
+        redirect('Welcome', 'refresh');
+    }
+}
+
+// ─── CONTEXTO: CONTROLADOR DE LOGIN ──────────────────────────────
+class LoginController extends CI_Controller {
+
+    // MAPA ASOCIATIVO DE PERFILES
+    private $estrategias = [
+        1 => 'AdminLoginStrategy',
+        2 => 'ClienteLoginStrategy',
+    ];
+
+    public function __construct() 
+    {
+        parent::__construct();
+        // CORRECCIÓN: Carga explícita de librerías y modelos necesarios
+        $this->load->library(['form_validation', 'session']);
+        $this->load->helper('url');
+        $this->load->model('loginModel');    
+    }
+
+    public function index()
+    {   
+        // Reglas de validación
+        $this->form_validation->set_rules('usuario', 'Usuario', 'trim|required');
+        $this->form_validation->set_rules('pass', 'Contraseña', 'trim|required|callback__valid_login');
+        
+        // Mensajes de error
+        $this->form_validation->set_message('required', 'El campo %s es requerido');
+        $this->form_validation->set_message('_valid_login', 'El usuario o contraseña son incorrectos');
+        
+        $this->form_validation->set_error_delimiters('<div class="alert alert-danger">', '</div>');
+        
+        if ($this->form_validation->run() == FALSE)
+        {   
+            // CORRECCIÓN: Orden lógico de carga de vistas (Estructura HTML correcta)
+            $data = array('titulo' => 'Error de datos o Login');
+            $this->load->view('partes/head_view', $data);
+            $this->load->view('partes/navbar_view');
+            $this->load->view('login');
+            $this->load->view('partes/footer_view');
         }
-	}
+        else 
+        {
+            // PASO 3: EJECUCIÓN DEL PATRÓN STRATEGY
+            $session_data = $this->session->userdata('login_in');
+            $perfil       = $session_data['perfil_id'] ?? 2; // Default a cliente si no existe
+            
+            $clase        = $this->estrategias[$perfil] ?? 'ClienteLoginStrategy';
+            
+            $strategy     = new $clase();
+            $strategy->redirigir();
+        }
+    }
 
+    public function _valid_login($pass)
+    { 
+        $usuario = $this->input->post('usuario');
+        $result = $this->loginModel->validarUsuario($usuario, $pass);
 
-	function _valid_login($pass)//$constraseña es una variable
-	{ 
-		//Se validaron los campos exitosamente. Se valida con la base de datos
-		$usuario = $this->input->post('usuario');
-
-        //Consulta a la base
-		$result = $this->loginModel->validarUsuario($usuario, $pass);
-
-		if($result)
-		{	//Si el resultado es correcto lo asigna a la variable session
-			$sess_array = array();//array de sesion
-			foreach($result as $row)
-			{//datos de la base de datos
-				$sess_array = array('id' => $row->id,
-									'nombre' => $row->nombre,
-									'apellido' => $row->apellido,
-									'email' => $row->email,
-                                    'perfil_id' => $row->perfil_id,
-                                    'usuario' => $row->usuario,
-                                    'pass' => $row->pass);
-									
-				$this->session->set_userdata('login_in', $sess_array);
-			}
-			return TRUE;
-		}
-		else 	//Sino devuelve que los datos no coinciden
-		{	
-			$this->form_validation->set_message('check_database', '<div class="alert alert-danger">Usuario o Contraseña invalido</div>');
-			return false;
-		}
-	}
+        if($result)
+        {   
+            $sess_array = array();
+            foreach($result as $row)
+            {
+                // CORRECCIÓN: Eliminamos 'pass' por seguridad. No se guarda en sesión.
+                $sess_array = array(
+                    'id'        => $row->id,
+                    'nombre'    => $row->nombre,
+                    'apellido'  => $row->apellido,
+                    'email'     => $row->email,
+                    'perfil_id' => $row->perfil_id,
+                    'usuario'   => $row->usuario
+                );
+                                    
+                $this->session->set_userdata('login_in', $sess_array);
+            }
+            return TRUE;
+        }
+        else 	
+        {	
+            return FALSE;
+        }
+    }
     
-    
-    //Este metodo llama a la pagina Login
-	public function login()
-	{
-		$data = array('titulo' => 'login');
-		
-		$session_data = $this->session->userdata('login_in');
-	    $data['perfil_id'] = $session_data['perfil_id'];
-		$data['nombre'] = $session_data['nombre'];
+    public function login()
+    {
+        // Verificar si el usuario está logueado antes de mostrar la vista
+        if (!$this->session->userdata('login_in')) {
+            redirect('LoginController/index');
+        }
 
-		$this->load->view('login');
-		$this->load->view('partes/head_view', $data);
-		$this->load->view('partes/navbar_view', $data);
-		$this->load->view('partes/footer_view');
-	}	
-    
-    
-    
-     function cerrar_sesion(){
-			//destruyo la variable de sesión
-			$this->session->sess_destroy();
-			//direcciono a la página principal
-			redirect(base_url('Welcome'));		
-		}	
+        $session_data = $this->session->userdata('login_in');
+        $data['titulo'] = 'Login Exitoso';
+        $data['perfil_id'] = $session_data['perfil_id'];
+        $data['nombre'] = $session_data['nombre'];
 
+        // Estructura ordenada de vistas
+        $this->load->view('partes/head_view', $data);
+        $this->load->view('partes/navbar_view', $data);
+        $this->load->view('login');
+        $this->load->view('partes/footer_view');
+    }	
+    
+    public function cerrar_sesion()
+    {
+        $this->session->sess_destroy();
+        redirect(base_url('Welcome'));		
+    }	
 }

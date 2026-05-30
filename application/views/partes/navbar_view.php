@@ -60,7 +60,7 @@
 
 				          <li class="menu-has-children"><a href="<?php echo base_url('#');?>">Usuarios</a>
 				          	<ul>
-				          		<li><a href="<?php echo base_url('registro');?>">Cargar Usuarios</a></li>
+				          		<li><a href="<?php echo base_url('registro');?>">Agregar Usuarios</a></li>
 				          		<li><a href="<?php echo base_url('usuarios_eliminados');?>">Activar Usuarios</a></li>
 				              <li><a href="<?php echo base_url('usuarios_eliminados');?>">Usuarios Eliminados</a></li>
 				              <li><a href="<?php echo base_url('usuario_todos');?>">Todos los Usuarios</a></li>
@@ -90,6 +90,7 @@
 				          <li><a href="<?php echo base_url('#blog');?>">Comercializacion</a></li>
 				          <li class="menu-has-children"><a href="<?php echo base_url('#');?>">Catalogo</a>
 				            <ul>
+				            	
 				              <li><a href="<?php echo base_url('BebidasCalientes');?>">Bebidas Caliente</a></li>
 				              <li><a href="<?php echo base_url('BebidasFrias');?>">Bebidas Frias</a></li>
 				              <li><a href="<?php echo base_url('ParaAcom');?>">Para Acompañar</a></li>
@@ -103,7 +104,8 @@
 				              <li class="menu-has-children"><a href="<?php echo base_url('visualizardatos');?>">Visualizar Datos</a></li>
 				            </ul>
 				        </li>
-				   <li class="menu-has-children" ><a href="<?php echo base_url('#');?>"><b>Bienvenido <?= $session_data['nombre'] ?></b></a>
+				   <li class="menu-has-children" ><a href="<?php echo base_url('#');?>"><b>Bienvenido <?= $session_data['nombre'] ?></b>
+       				 </a>
 				   <ul>
                     <li><a href="<?php echo base_url('cerrarSesion');?>">SALIR</a></li>
 				  </ul>

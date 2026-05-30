@@ -11,14 +11,17 @@ class Carrito_model extends CI_Model {
        
 	public function insert_venta($data)
 	{
+		//$this->db es SIEMPRE la misma instancia (Singleton de CI)
 		$this->db->insert('ventas_cabecera', $data);
-		$id = $this->db->insert_id();
+		$id = $this->db->insert_id(); //ID de la cabecera recien creada
 		return (isset($id)) ? $id : FALSE;
 	}
 	
 	public function insert_ventas_detalle($data)
 	{
+		//MISMA instancia: garantiza coherencia con insert_venta()
 		$this->db->insert('ventas_detalle', $data);
 	}
        
 }
+

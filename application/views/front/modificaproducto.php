@@ -5,7 +5,7 @@
 		<a href="<?php echo base_url('productos_todos'); ?>" 
    			class="btn" 
    			style="background-color: #4b3621; border: none; color: white; padding: 10px 30px; font-size: 16px; font-weight: bold; border-radius: 5px;">
-   				<i class="fa fa-arrow-left"></i> Atrás
+   				<i class="fa fa-arrow-left"></i>  Atrás
 		</a>
 		<center><h1>Modificar Datos</h1>	
 		<h6> <b>Acepta imagenes gif, jpg, jpeg, png</b></h6>

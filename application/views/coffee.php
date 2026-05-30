@@ -127,7 +127,7 @@
 								<div class="title-div justify-content-between d-flex">
 									<h4>Cappuccino</h4>
 									<p class="price float-right">
-										$19,50
+										$2,600
 									</p>
 								</div>
 								<p>
@@ -140,7 +140,7 @@
 								<div class="title-div justify-content-between d-flex">
 									<h4>Americano</h4>
 									<p class="price float-right">
-										$30
+										$2,800
 									</p>
 								</div>
 								<p>
@@ -153,7 +153,7 @@
 								<div class="title-div justify-content-between d-flex">
 									<h4>Espresso</h4>
 									<p class="price float-right">
-										$35
+										$2,500
 									</p>
 								</div>
 								<p>
@@ -179,7 +179,7 @@
 								<div class="title-div justify-content-between d-flex">
 									<h4>Mocca</h4>
 									<p class="price float-right">
-										$32,10
+										$2,500
 									</p>
 								</div>
 								<p>
@@ -194,7 +194,7 @@
 								<div class="title-div justify-content-between d-flex">
 									<h4>Coffee Latte</h4>
 									<p class="price float-right">
-										$41
+										$3,100
 									</p>
 								</div>
 								<p>
@@ -207,7 +207,7 @@
 								<div class="title-div justify-content-between d-flex">
 									<h4>Piccolo Latte</h4>
 									<p class="price float-right">
-										$35,40
+										$1,600
 									</p>
 								</div>
 								<p>
@@ -220,7 +220,7 @@
 								<div class="title-div justify-content-between d-flex">
 									<h4>Ristretto</h4>
 									<p class="price float-right">
-										$49
+										$2,000
 									</p>
 								</div>
 								<p>
@@ -233,7 +233,7 @@
 								<div class="title-div justify-content-between d-flex">
 									<h4>Caffogato</h4>
 									<p class="price float-right">
-										$41,30
+										$1,700
 									</p>
 								</div>
 								<p>

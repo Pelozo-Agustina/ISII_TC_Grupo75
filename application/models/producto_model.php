@@ -6,9 +6,11 @@ class Producto_model extends CI_Model{
 	/**
     * Constructor de la clase
     */
-    public function __construct() {
+     public function __construct() {
         parent::__construct();
+        $this->load->database(); // Carga la base de datos de CodeIgniter
     }
+
 
     /**
     * Retorna todos los productos
@@ -122,7 +124,9 @@ class Producto_model extends CI_Model{
         }        
     }
 
-    //
+/************************************************************************** 
+ *                                  Ventas_Cabecera
+ **************************************************************************/
     function get_ventas_cabecera(){
         $this->db->select('*');
         $this->db->from('ventas_cabecera');
@@ -138,23 +142,31 @@ class Producto_model extends CI_Model{
             return FALSE;
         }
     }
+  /************************************************************************* 
+ *                                  Ventas_Detalle
+ **************************************************************************/ 
+ function get_ventas_detalle($id){
+    $this->db->select('ventas_detalle.*, COALESCE(productos.descripcion, "Producto no encontrado o eliminado") as descripcion, productos.precio_costo, productos.precio_venta');
+    $this->db->from('ventas_detalle');
     
-        function get_ventas_detalle($id){
-        $this->db->join('productos','productos.id = ventas_detalle.producto_id');   
+    // 💡 CAMBIO CLAVE: Agregamos el tercer parámetro 'left' para que no ignore registros
+    $this->db->join('productos', 'productos.id = ventas_detalle.producto_id', 'left');   
+    
+    $this->db->where('ventas_detalle.cabecera_id', $id);
 
-        //select * from ventas_detalle;
-        $query = $this->db->get_where('ventas_detalle', array('venta_id' => $id));
-       
-          
-        if($query->num_rows()>0) {
-            return $query;
-        } else {
-            return FALSE;
-        }
+    $query = $this->db->get();
+   
+    if($query && $query->num_rows() > 0) {
+        return $query;
+    } else {
+        return FALSE;
     }
+}
 
 
-//reservas
+/************************************************************************** 
+ *                                  Reservas
+ **************************************************************************/
 function get_muestra_reserva() {
     // Seleccionamos datos de reserva, nombre de usuario, descripción de mesa y horas
     $this->db->select('r.*, u.nombre, u.apellido, m.descripcion as nombre_mesa, m.capacidad, h.hora_inicio, h.hora_fin');
@@ -196,8 +208,15 @@ public function get_reservas_confirmadas() {
 
 
 
+/**
+ * Cambia el estado de una reserva usando el patrón State.
+ * Pendiente → Confirmada (confirmar)
+ * Confirmada → Cancelada (cancelar)
+ * Cancelada  → LogicException (estado terminal)
+ */
 
-/** Alterna el estado entre Confirmada y Pendiente */
+
+/** Alterna el estado entre Confirmada y Pendiente 
 public function toggle_estado_reserva($id) {
     // 1. Primero consultamos el estado actual de esa reserva
     $this->db->where('id_reserva', $id);
@@ -210,9 +229,46 @@ public function toggle_estado_reserva($id) {
     // 3. Actualizamos
     $this->db->where('id_reserva', $id);
     return $this->db->update('reservas', array('estado_reserva' => $nuevo_estado));
+}*/
+
+public function toggle_estado_reserva($id) {
+    // 1. Consultamos el registro en la base de datos
+    $this->db->where('id_reserva', $id);
+    $query = $this->db->get('reservas');
+    
+    // CONTROL CRÍTICO DE SEGURIDAD: Verificamos si realmente existe el registro
+    if ($query->num_rows() == 0) {
+        return FALSE; // Evita el Error 500 si la reserva no existe
+    }
+
+    $reserva = $query->row();
+
+    // 2. Definimos el nuevo estado de forma segura
+    $nuevo_estado = ($reserva->estado_reserva == 'Pendiente') ? 'Confirmada' : 'Pendiente';
+    
+    // 3. Actualizamos el registro
+    $this->db->where('id_reserva', $id);
+    return $this->db->update('reservas', array('estado_reserva' => $nuevo_estado));
 }
 
 
+
+//Verificamos las mesas ocupadas
+public function verificar_mesa_ocupada($fecha, $id_horario, $id_mesa){
+    $this->db->where('fecha_reserva', $fecha);
+    $this->db->where('id_horario', $id_horario);
+    $this->db->where('id_mesa', $id_mesa);
+    
+    // Solo contamos las reservas que están activas (ignora canceladas o expiradas)
+    $this->db->where_in('estado_reserva', array('Confirmada', 'Pendiente'));
+
+    $query = $this->db->get('reservas');
+
+    if ($query->num_rows() > 0) {
+        return TRUE; // La mesa ya está ocupada en ese día y turno
+    }
+    return FALSE; // La mesa está libre
+}
 
 
 /** Actualiza el estado_reserva 
@@ -279,7 +335,6 @@ public function update_estado_confirmar($id) {
 
 
 
+
+
 }
-    
-
-

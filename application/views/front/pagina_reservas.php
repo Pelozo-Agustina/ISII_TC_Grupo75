@@ -20,43 +20,67 @@
 
 
         <div class="conteiner-form-reserva">
-         <!-- Formulario Reservas -->
-         <form action="guardar_reserva.php" method="POST" id="formulario-re">
-                   
-               <label id="labels">Fecha de reserva:  </Label>
-               <input type="date" class="campo-datos" name="fecha-reserva" id="fechaReserva">  <br>
 
-              <!-- Selecciona hora -->
-               <label id="labels">Hora de la reserva: </label>  
-                    <select name="opciones-cart" id="option_carts">
-                         <option value="1">8:30 a 10:00</option>
-                         <option value="2">10:30 a 12:00</option>    
-                         <option value="3">12:30 a 14:00</option>   
-                         <option value="4">17:00 a 18:30</option>
-                         <option value="5">19:00 a 20:30</option>     
-                    </select> 
+        <!-- CASO 1: SI LA RESERVA FUE EXITOSA -> Muestra el cartel con los datos -->
+        <?php if (isset($reserva_exitosa) && $reserva_exitosa == TRUE): ?>
+            
+            <div style="text-align: center; padding: 10px;">
+                <h2 style="color: #4a3428; font-weight: bold; margin-bottom: 20px;">☕ <br> ¡Reserva Realizada!</h2>
+                <p style="font-size: 18px; color: #6d4c41; margin-bottom: 15px; line-height: 1.6;">
+                     Te esperamos el día <strong><?php echo date('d/m/Y', strtotime($fecha_exitosa)); ?></strong> <br>
+                    En la <strong>Mesa <?php echo $mesa_exitosa; ?></strong>.
+                </p>
+                
+                <a href="<?php echo base_url('realizar_reserva'); ?>" id="btn_confirmar_reserva" style="text-decoration: none; display: block; text-align: center;">
+                    HACER OTRA RESERVA
+                </a>
+            </div>
 
-            <!-- Selecciona Mesa -->
+        <!-- CASO 2: SI NO SE ENVIÓ NADA -> Muestra el formulario estándar de reserva -->
+        <?php else: ?>
+
+            <form action="<?php echo base_url('realizar_reserva'); ?>" method="POST" id="formulario-re">
+                       
+                <!-- Mensaje de error si falla la validación de tiempo o mesa ocupada -->
+                <?php if($this->session->flashdata('error_reserva')): ?>
+                    <div style="background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; padding: 12px; border-radius: 8px; margin-bottom: 20px; font-weight: bold; text-align: center; font-size: 14px;">
+                        <?php echo $this->session->flashdata('error_reserva'); ?>
+                    </div>
+                <?php endif; ?>
+
+                <label id="labels">Fecha de reserva:</label>
+                <input type="date" class="campo-datos" name="fecha-reserva" id="fechaReserva" required> <br>
+
+                <!-- Selecciona hora -->
+                <label id="labels">Hora de la reserva:</label>  
+                <select name="opciones-cart" id="option_carts">
+                    <option value="1">8:30 a 10:00</option>
+                    <option value="2">10:30 a 12:00</option>    
+                    <option value="3">12:30 a 14:00</option>   
+                    <option value="4">17:00 a 18:30</option>
+                    <option value="5">19:00 a 20:30</option>     
+                </select> 
+
+                <!-- Selecciona Mesa -->
                 <label id="labels">Seleccione Mesa:</label>
-                    <select name="id_mesa" id="option_mesa" class="campo-datos">
-                         <!-- Aquí cargarías las mesas con PHP -->
-                         <option value="1">Mesa 1 - Ventana (2 pers.)</option>
-                         <option value="2">Mesa 2 - Ventana (2 pers.)</option>
-                         <option value="3">Mesa 3 - Centro (4 pers.)</option>
-                         <option value="4">Mesa 4 - Centro (4 pers.)</option>
-                         <option value="5">Mesa 5 - Rincón (2 pers.)</option>
-                         <option value="6">Mesa 6 - Terraza (6 pers.)</option>
-                    </select>
+                <select name="id_mesa" id="option_mesa" class="campo-datos">
+                    <option value="1">Mesa 1 - Ventana (2 pers.)</option>
+                    <option value="2">Mesa 2 - Ventana (2 pers.)</option>
+                    <option value="3">Mesa 3 - Centro (4 pers.)</option>
+                    <option value="4">Mesa 4 - Centro (4 pers.)</option>
+                    <option value="5">Mesa 5 - Rincón (2 pers.)</option>
+                    <option value="6">Mesa 6 - Terraza (6 pers.)</option>
+                </select>
 
                 <!-- BOTÓN PARA REALIZAR LA RESERVA -->
-                <input type="submit" id="btn_confirmar_reserva" name="enviar-datosForm" value="REALIZAR RESERVA"> </input>
+                <input type="submit" id="btn_confirmar_reserva" name="enviar-datosForm" value="REALIZAR RESERVA">
+             
+            </form>  
 
-         
-        </form>  
-
+        <?php endif; ?>
             
-        </div>
     </div>
+</div>
 
 
 <style>

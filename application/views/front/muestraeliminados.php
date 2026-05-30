@@ -50,7 +50,14 @@
 				</tr>
 				<?php } ?>
 			</tbody>
-		</table>	            
+		</table>	 
+		<div class="text-center my-3">
+    		<a href="<?php echo base_url('productos_todos'); ?>" 
+      		 class="btn" 
+       			style="background-color: #4b3621; border: none; color: white; padding: 10px 30px; font-size: 16px; font-weight: bold; border-radius: 5px;">
+       			Todos los Productos
+    		</a>
+		</div>           
 	</div>
 
 <?php } ?>

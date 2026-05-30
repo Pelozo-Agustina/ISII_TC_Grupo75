@@ -64,3 +64,18 @@
 	</div>
 
 <?php } ?>
+
+<style>
+	/* Efecto hover al pasar el cursor por las filas */
+tr:hover td {
+    background-color: #f8fafc; 
+}
+
+/* Alineaciones específicas */
+td:nth-child(1), th:nth-child(1) { text-align: center; width: 50px; } 
+td:nth-child(4), th:nth-child(4), 
+td:nth-child(5), th:nth-child(5), 
+td:nth-child(6), th:nth-child(6) { 
+    text-align: right; 
+}
+</style>

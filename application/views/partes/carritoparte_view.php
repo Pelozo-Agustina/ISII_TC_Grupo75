@@ -1,39 +1,39 @@
 <!-- inicio banner -->
-                <section class="banner-area" id="home"> 
-                <div class="container">
-                    <div class="row fullscreen d-flex align-items-center justify-content-start">
-                        <font size="7" color="white">
-                          Productos
-                        </font>
-                    </div>
-                </div>
-            </section>      
-            <!-- Fin banner -->
+<section class="banner-area" id="home"> 
+    <div class="container">
+        <div class="row fullscreen d-flex align-items-center justify-content-start">
+            <font size="7" color="white">Productos</font>
+        </div>
+    </div>
+</section>      
+<!-- Fin banner -->
 
 <section class="menu-area section-gap" id="Carrito">
 <div class="container-fluid" id="carrito">
-    <div class="cart" >
-        <div class = "heading">
+    <div class="cart">
+        <div class="heading">
             <h2 id="h2" align="center">Productos en tu Carrito</h2>
         </div>
         
-        <div class="text" align="center"> 
+        <!-- MENSAJE DE ALERTA: Si el controlador detecta un número inválido o falta de stock -->
+        <?php if($this->session->flashdata('error_carrito')): ?>
+            <div class="alert alert-danger" role="alert" style="text-align: center; max-width: 500px; margin: 20px auto;">
+                <strong>¡Atención!</strong> <?php echo $this->session->flashdata('error_carrito'); ?>
+            </div>
+        <?php endif; ?>
 
-            <?php  $cart_check = $this->cart->contents();
-            // Si el carrito está vacio, mostrar el siguiente mensaje
-            if (empty($cart_check)) 
-            {
-                echo 'Para agregar productos al carrito, click en "Comprar"';
+        <div class="text" align="center"> 
+            <?php  
+            $cart_check = $this->cart->contents();
+            if (empty($cart_check)) {
+                echo 'Para agregar productos al carrito, click en "Agregar al Carrito"';
             }  
             ?>    
         </div>
         
         <table class="table" border="0" cellpadding="5px" cellspacing="1px">
-
-            <?php // Todos los items de carrito en "$cart". 
-            if ($cart = $this->cart->contents()):  
-            ?>
-                <tr id= "main_heading">
+            <?php if ($cart = $this->cart->contents()): ?>
+                <tr id="main_heading">
                     <td>ID</td>
                     <td>Descripcion</td>
                     <td>Precio</td>
@@ -42,8 +42,8 @@
                     <td>Cancelar Producto</td>
                 </tr>
 
-            <?php // Crea un formulario y manda los valores a carrito_controller/actualiza carrito
-            echo form_open('carrito_actualiza');
+                <?php 
+                echo form_open('carrito_actualiza');
                 $gran_total = 0;
                 $i = 1;
 
@@ -52,28 +52,27 @@
                     echo form_hidden('cart[' . $item['id'] . '][rowid]', $item['rowid']);
                     echo form_hidden('cart[' . $item['id'] . '][name]', $item['name']);
                     echo form_hidden('cart[' . $item['id'] . '][price]', $item['price']);
-                    echo form_hidden('cart[' . $item['id'] . '][qty]', $item['qty']);
-            ?>
+                    
+                    $gran_total = $gran_total + $item['subtotal'];
+                ?>
                     <tr>
+                        <td><?php echo $i++; ?></td>
+                        <td><?php echo $item['name']; ?></td>
+                        <td>$ <?php echo number_format($item['price'], 2); ?></td>
                         <td>
-                            <?php echo $i++; ?>
-                        </td>
-                        <td>
-                            <?php echo $item['name']; ?>
-                        </td>
-                        <td>
-                            $ <?php echo number_format($item['price'], 2); ?>
-                        </td>
-                        <td>
-                            <?php echo form_input('cart[' . $item['id'] . '][qty]', $item['qty'], 
-                                                    'maxlength="3" size="1" style="text-align: right"'); ?>
-                        </td>
-                            <?php $gran_total = $gran_total + $item['subtotal']; ?>
-                        <td>
-                            $ <?php echo number_format($item['subtotal'], 2) ?>
-                        </td>
+    <!-- Permitimos el teclado pero vigilamos la entrada en tiempo real con oninput -->
+    <input type="number" 
+           name="cart[<?php echo $item['id']; ?>][qty]" 
+           value="<?php echo $item['qty']; ?>" 
+           min="1" 
+           max="<?php echo $item['stock']; ?>" 
+           style="text-align: right; width: 80px;" 
+           class="form-control" 
+           oninput="validarStockEnTiempoReal(this)">
+</td>
+                        <td>$ <?php echo number_format($item['subtotal'], 2) ?></td>
                         <td> 
-                            <?php // Imagen
+                            <?php 
                                 $path = '<img src= '. base_url('assets/img/carrito.jpg') . ' width="50px" height="50px">';
                                 echo anchor('carrito_elimina/' . $item['rowid'], $path); 
                             ?>
@@ -86,18 +85,20 @@
                 <tr>
                     <td>
                         <b>Total: $
-                            <?php //Gran Total
-                            echo number_format($gran_total, 2); 
-                            ?>
+                            <?php echo number_format($gran_total, 2); ?>
                         </b>
                     </td> 
                     <td colspan="5" align="right">
-                        <!-- Borrar carrito usa mensaje de confirmacion javascript implementado en partes/head_view -->
-                        <input type="button" class ='btn btn-primary btn-lg' value="Borrar Carrito" onclick="borra_carrito()">
-                        <!-- Submit boton. Actualiza los datos en el carrito -->
-                        <input type="submit" class ='btn btn-primary btn-lg' value="Actualizar">
-                        <!-- " Confirmar orden envia a carrito_controller/muestra_compra  -->
-                        <input type="button" class ='btn btn-primary btn-lg' value="Confirmar Orden" onclick="window.location = 'comprar'">
+                        <!-- Botón Borrar Carrito -->
+                        <input type="button" class='btn btn-primary btn-lg' value="Borrar Carrito" onclick="borra_carrito()">
+                        
+                        <!-- Botón Actualizar (Ahora procesa la validación) -->
+                        <input type="submit" class='btn btn-primary btn-lg' value="Actualizar">
+                        
+                        <!-- Botón Confirmar Orden (Ahora llama a una función de validación segura) -->
+                        <!-- Botón Confirmar Orden corregido -->
+                        <input type="button" class='btn btn-primary btn-lg' value="Confirmar Orden" onclick="window.location = 'venta'">
+
                     </td>
                 </tr>
                 <?php echo form_close();
@@ -106,4 +107,29 @@
     </div>
 </div>
 </section>
+
+<!-- SCRIPT DE VALIDACIÓN DE SEGURIDAD -->
+<script>
+function validarStockEnTiempoReal(input) {
+    var valor = parseInt(input.value);
+    var max = parseInt(input.getAttribute('max'));
+    var min = parseInt(input.getAttribute('min')) || 1;
+
+    if (input.value === "") {
+        return;
+    }
+
+    // Si escribe un número menor o igual a 0
+    if (valor < min) {
+        input.value = min;
+        alert("Ingrese una cantidad mayor al 0 por favor.");
+    } 
+    // Si excede el stock máximo permitido
+    else if (valor > max) {
+        input.value = max;
+        alert("Lo sentimos, la cantidad ingresada supera el stock disponible. Máximo permitido: " + max + " unidades.");
+    }
+}
+</script>
+
 <br>

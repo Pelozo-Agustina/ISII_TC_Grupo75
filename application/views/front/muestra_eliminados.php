@@ -14,7 +14,7 @@
 
 	<div class="container">
 		<div class="well">
-			<h1>No hay Eliminados</h1>
+			<h1>No hay Usuarios Eliminados</h1>
 		</div>	
 	</div>
 
@@ -22,7 +22,7 @@
 
 	<div class="container">
 		<div class="well">
-			<h1>Todos los Eliminados</h1>
+			<h1>Todos los Usuarios Eliminados</h1>
 		</div>	
 
 		<table class="table table-bordered">

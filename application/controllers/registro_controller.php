@@ -44,7 +44,7 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 										'<div class="alert alert-danger">Los contraseña ingresada no coincide</div>');
 
 			$this->form_validation->set_message('is_unique',
-										'<div class="alert alert-danger">El campo %s ya existe</div>');
+										'<div class="alert alert-danger">El dato ingresado en el campo %s ya existe</div>');
 
 			$pass = $this->input->post('re_password',true);
 

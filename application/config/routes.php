@@ -67,7 +67,12 @@ $route['verificoUsuario'] ='loginController';
 //$route['editar'] = 'Welcome/editar';
 
 
-//rutas de productos
+
+
+
+/************************************************************************** 
+							Rutas Productos
+**************************************************************************/
 $route['cargar_producto'] = 'producto_controller/form_agrega_producto';
 $route['verifico_nuevoproducto'] = 'producto_controller/agrega_producto';
 $route['productos_todos'] = 'producto_controller';
@@ -80,7 +85,12 @@ $route['producto_elimina/(:num)'] = 'producto_controller/eliminar_producto/$1';
 $route['productos_activa/(:num)'] = 'producto_controller/activar_producto/$1';
 
 
-//rutas administrador
+
+
+
+/************************************************************************** 
+							Rutas Administrador
+**************************************************************************/
 $route['cargar_usuario'] = 'registro_controller/form_agrega_usuario';
 $route['verificoUsuario/(:num)'] = 'registro_controller/agrega_usuario/$1';
 $route['usuario_todos'] = 'registro_controller/muestra_usuario';
@@ -95,26 +105,38 @@ $route['usuarios_activa/(:num)'] = 'registro_controller/activar_usuario/$1';
 $route['editar'] = 'Welcome/editar_usuario';
 
 
-//rutas de reportes
+
+
+/************************************************************************** 
+							Rutas Reportes
+**************************************************************************/
 $route['ventas'] = 'producto_controller/listar_ventas';
 $route['muestra_detalle/(:num)'] = 'producto_controller/muestra_detalle/$1';
-
 $route['consultas']='Welcome/consultas';
 $route['eliminar'] = 'Welcome/eliminar';
 $route['visualizardatos'] = 'registro_controller/visualizardatos';
 
-//rutas de reservas
+
+
+
+
+/************************************************************************** 
+							Rutas Reservas
+**************************************************************************/
+
 $route['muestraReservas'] = 'producto_controller/muestra_reserva';
-$route['reservasCanceladas'] = 'producto_controller/muestra_reservasCanceladas';
-$route['cancelar_reserva/(:num)'] = 'producto_controller/cancelar_reserva/$1';
-$route['activar_recerva/(:num)'] = 'producto_controller/activar_reserva/$1';
+//$route['reservasCanceladas'] = 'producto_controller/muestraReservasCanceladas';
+//$route['cancelar_reserva/(:num)'] = 'producto_controller/cancelar_reserva/$1';
+//$route['activar_recerva/(:num)'] = 'producto_controller/activar_reserva/$1';
+$route['reservasConfirmadas'] = 'producto_controller/muestraReservasConfirmadas';
+$route['actualizarEstado/(:num)'] = 'producto_controller/actualizarEstado/$1';
+$route['realizar_reserva'] = 'producto_controller/realizar_reserva';
 
-$route['hacer_reserva'] = 'producto_controller/hacer_reserva';
 
 
-
-
-//rutas carrito
+/************************************************************************** 
+							Rutas Carrito
+**************************************************************************/
 $route['BebidasC'] = 'carrito_controller/mostrarBebidasC';
 $route['BebidasF'] = 'carrito_controller/mostrarBebidasF';
 $route['ParaA'] = 'carrito_controller/mostrarParaAcom';
@@ -123,11 +145,11 @@ $route['BebidasCalientes'] ='carrito_controller/BebidasCalientes';
 $route['BebidasFrias'] ='carrito_controller/BebidasFria';
 $route['ParaAcom'] ='carrito_controller/ParaAcom';
 
-$route['carrito_agrega'] = 'carrito_controller/add';
+$route['carrito_agrega'] = 'carrito_controller/añadirCarrito';
 $route['carrito_actualiza'] = 'carrito_controller/actualiza_carrito';
-$route['carrito_elimina/(:any)'] = 'carrito_controller/remove/$1';
-$route['comprar'] = 'carrito_controller/muestra_compra';
-$route['confirma_compra'] = 'carrito_controller/guarda_compra';
+$route['carrito_elimina/(:any)'] = 'carrito_controller/eliminarCarrito/$1';
+$route['venta'] = 'carrito_controller/mostrar_venta';
+$route['confirma_venta'] = 'carrito_controller/realizar_venta';
 
 
 $route['404_override'] = '';

@@ -56,65 +56,75 @@
     <tr>
         <td><strong>#<?php echo $row->id_reserva; ?></strong></td>
         
-        <!-- Si el JOIN funcionó, muestra el nombre. Si no, muestra el ID por seguridad -->
+        <!-- Muestra el nombre si existe el JOIN, sino el ID -->
         <td><?php echo isset($row->nombre) ? ($row->nombre." ".$row->apellido) : "ID: ".$row->id_usuario; ?></td>
         
         <td><?php echo date("d/m/Y", strtotime($row->fecha_reserva)); ?></td>
         
-       <!-- Celda de Mesas -->
-		<td>
-    <strong><?php echo $row->nombre_mesa; ?></strong><br>
-    <small style="color: #8d6e63;">Capacidad: <?php echo $row->capacidad; ?> pers.</small>
-		</td>
-		<!-- Celda de Horario -->
-		<td>
-    		<?php 
-    			if(isset($row->hora_inicio)){
-        			echo substr($row->hora_inicio, 0, 5) . " a " . substr($row->hora_fin, 0, 5);
-    			} else {
-    			    echo "Turno ".$row->id_horario;
-    			}
-    		?>
-    			
-    	</td>
+        <!-- Celda de Mesas -->
+        <td>
+            <strong><?php echo $row->nombre_mesa; ?></strong><br>
+            <small style="color: #8d6e63;">Capacidad: <?php echo $row->capacidad; ?> pers.</small>
+        </td>
 
-       <td>
-    <!-- Si es Confirmada usa badge-confirmado (verde), si no badge-pendiente (naranja) -->
-    <span class="<?php echo ($row->estado_reserva == 'Confirmada') ? 'badge-confirmado' : 'badge-pendiente'; ?>">
-        <?php echo $row->estado_reserva; ?>
-    </span>
-</td>
+        <!-- Celda de Horario -->
+        <td>
+            <?php 
+                if(isset($row->hora_inicio)){
+                    echo substr($row->hora_inicio, 0, 5) . " a " . substr($row->hora_fin, 0, 5);
+                } else {
+                    echo "Turno ".$row->id_horario;
+                }
+            ?>
+        </td>
 
-<td class="text-center">
-    <?php 
-        // 1. Calculamos si la reserva ya expiró
-        $fecha_y_hora_fin = $row->fecha_reserva . ' ' . $row->hora_fin;
-        $expirada = (time() > strtotime($fecha_y_hora_fin));
-    ?>
+        <!-- Celda de Estado -->
+        <td>
+            <span class="<?php echo ($row->estado_reserva == 'Confirmada') ? 'badge-confirmado' : 'badge-pendiente'; ?>">
+                <?php echo $row->estado_reserva; ?>
+            </span>
+        </td>
 
-    <?php if ($expirada): ?>
-        <!-- Si ya pasó el tiempo, no importa el estado, mostramos que expiró -->
-        <span class="badge bg-light text-muted" style="font-style: italic;">Expirada</span>
+        <!-- Celda de Acciones Corregida -->
+        <td class="text-center">
+            <?php 
+                // Forzar zona horaria local antes del cálculo
+                date_default_timezone_set('America/Argentina/Buenos_Aires');
 
-    <?php elseif ($row->estado_reserva == 'Confirmada'): ?>
-        <!-- Botón bloqueado (Gris) -->
-        <button class="btn btn-secondary" style="cursor: not-allowed; opacity: 0.7;" disabled>
-            ✔ Confirmado
-        </button>
+                // Si la consulta no trae hora_fin por falta de un JOIN, usamos un mapa de respaldo
+                $hora_cierre = isset($row->hora_fin) ? $row->hora_fin : "23:59:59";
+                if (!isset($row->hora_fin)) {
+                    $horas_respaldo = ["1" => "10:00:00", "2" => "12:00:00", "3" => "14:30:00", "4" => "18:30:00", "5" => "20:30:00"];
+                    $hora_cierre = isset($horas_respaldo[$row->id_horario]) ? $horas_respaldo[$row->id_horario] : "23:59:59";
+                }
 
-    <?php else: ?>
-        <!-- Botón activo (Verde) solo si NO ha expirado y NO está confirmada -->
-        <a href="<?php echo base_url('actualizarEstado/'.$row->id_reserva); ?>" 
-           class="btn btn-success"
+                // Creamos el timestamp exacto del fin de la reserva
+                $fecha_y_hora_fin = $row->fecha_reserva . ' ' . $hora_cierre;
+                $expirada = (time() > strtotime($fecha_y_hora_fin));
+            ?>
+
+            <?php if ($expirada): ?>
+                <!-- Estado Expirado -->
+                <span class="badge bg-light text-muted" style="font-style: italic;">Expirada</span>
+
+            <?php elseif ($row->estado_reserva == 'Confirmada'): ?>
+                <!-- Reserva ya Confirmada -->
+                <button class="btn btn-secondary" style="cursor: not-allowed; opacity: 0.7;" disabled>
+                    ✔ Confirmada
+                </button>
+
+            <?php else: ?>
+                <!-- Botón activo (Verde) solo si NO ha expirado y NO está confirmada -->
+       <a href="<?php echo base_url('actualizarEstado/'.$row->id_reserva); ?>"class="btn btn-success"
            onclick="return confirm('¿Desea confirmar esta reserva?')">
            Confirmar
         </a>
-    <?php endif; ?>
-</td>
+            <?php endif; ?>
+        </td>
     </tr>
     <?php } ?>
-
 </tbody>
+
 
 		</table>	            
 	</div>
