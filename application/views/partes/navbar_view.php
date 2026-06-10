@@ -30,24 +30,30 @@
  <?php if(($this->session->userdata('login_in')) and ($session_data['perfil_id']=='1') ) {?>
     			<ul class="nav-menu">
 				          <li class="menu-active"><a href="<?php echo base_url('#home');?>">Inicio</a></li>
-				          <li class="menu-has-children"><a href="<?php echo base_url('#');?>">Productos</a>
-				          	<ul>
+
+				          <!--Producto-->
+				          <li class="menu-has-children"><a href="<?php echo base_url('productos_todos');?>">Productos</a>
+				          	<!--<ul>
 				          		<li><a href="<?php echo base_url('cargar_producto');?>">Agregar Producto</a></li>
 				          		<li><a href="<?php echo base_url('productos_todos');?>">Modificar Producto</a></li>
 				          		<li><a href="<?php echo base_url('productos_todos');?>">Eliminar Producto</a></li>
 				          		<li><a href="<?php echo base_url('productos_eliminados');?>">Productos Eliminados</a></li>
 				          		<li><a href="<?php echo base_url('productos_eliminados');?>">Activar Productos</a></li>
 				          		<li><a href="<?php echo base_url('productos_todos');?>">Todos los Productos</a></li>
-				          	</ul>
-				          </li>
-				          <li class="menu-has-children"><a href="<?php echo base_url('#');?>">Reportes</a>
-				          	<ul>
-				              <li><a href="<?php echo base_url('ventas');?>">Ventas</a></li>
-				              <li><a href="<?php echo base_url('consultas');?>">Consultas</a></li>
-				            </ul>
+				          	</ul>-->
 				          </li>
 
-				          <!--Reservas-->
+						<!--Stock-->
+						<li class="menu-has-children"><a href="<?php echo base_url('#');?>">Stock</a>
+				            <ul>
+				              <li><a href="<?php echo base_url('BebidasC');?>">Bebidas Calientes</a></li>
+				              <li><a href="<?php echo base_url('BebidasF');?>">Bebidas Frias</a></li>
+				              <li><a href="<?php echo base_url('ParaA');?>">Para Acompañar</a></li>
+				              <li><a href="<?php echo base_url('stock_bajo');?>">Stock Bajo</a></li>
+				            </ul>
+				        </li>
+				         	
+ 						  <!--Reservas-->
 				          <li class="menu-has-children"><a href="<?php echo base_url('#');?>">Reservas</a>
 				          	<ul>
 				          		<!--
@@ -58,21 +64,24 @@
 				            </ul>
 				          </li>
 
+				          <!--Reportes-->
+				          <li class="menu-has-children"><a href="<?php echo base_url('#');?>">Reportes</a>
+				          	<ul>
+				              <li><a href="<?php echo base_url('ventas');?>">Ventas</a></li>
+				              <li><a href="<?php echo base_url('consultas');?>">Consultas</a></li>
+				            </ul>
+				          </li>
+
+				          <!--Usuarios-->
 				          <li class="menu-has-children"><a href="<?php echo base_url('#');?>">Usuarios</a>
 				          	<ul>
 				          		<li><a href="<?php echo base_url('registro');?>">Agregar Usuarios</a></li>
-				          		<li><a href="<?php echo base_url('usuarios_eliminados');?>">Activar Usuarios</a></li>
+				          		<!--<li><a href="<?php echo base_url('usuarios_eliminados');?>">Activar Usuarios</a></li>-->
 				              <li><a href="<?php echo base_url('usuarios_eliminados');?>">Usuarios Eliminados</a></li>
 				              <li><a href="<?php echo base_url('usuario_todos');?>">Todos los Usuarios</a></li>
 				            </ul>
 				          </li>
-				         	<li class="menu-has-children"><a href="<?php echo base_url('#');?>">Stock</a>
-				            <ul>
-				              <li><a href="<?php echo base_url('BebidasC');?>">Bebidas Caliente</a></li>
-				              <li><a href="<?php echo base_url('BebidasF');?>">Bebidas Frias</a></li>
-				              <li><a href="<?php echo base_url('ParaA');?>">Para Acompañar</a></li>
-				            </ul>
-				        </li>
+
 				   <li class="menu-has-children" ><a href="<?php echo base_url('#');?>"><b>Administrador <?= $session_data['nombre'] ?></b></a>
 				   <ul>
                     <li><a href="<?php echo base_url('cerrarSesion');?>">SALIR</a></li>
