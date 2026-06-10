@@ -8,6 +8,12 @@
 
 <?php } else { ?>
 
+<?php if ($this->session->flashdata('error_carrito')): ?>
+    <div style="background:#fdecea;color:#c62828;border:1px solid #ef9a9a;padding:12px 20px;border-radius:8px;margin:15px auto;max-width:600px;text-align:center;font-weight:600;">
+        ⚠️ <?php echo $this->session->flashdata('error_carrito'); ?>
+    </div>
+<?php endif; ?>
+
 <div class="container-fluid">
 	
 	<h2 class="text-center">Bebidas Calientes</h2>

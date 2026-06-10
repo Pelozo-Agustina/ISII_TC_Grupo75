@@ -14,10 +14,6 @@
     <!-- La vista solicitará los datos del día y hora de la reserva --> 
 
     <div class="contenedor-principal-reserva">
-    
-         <h4 id="titulo-1reserva">Si desea realizar una reserva de mesa, por favor rellene los siguientes campos.</h4>
-        <h5 id="titulo-2reserva">Seleccione día y hora preferida para la reserva de la mesa.</h5>
-
 
         <div class="conteiner-form-reserva">
 

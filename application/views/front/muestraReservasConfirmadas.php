@@ -92,14 +92,8 @@
         $tiempo_actual = time(); 
 
         // 3. LA CONDICIÓN: Si el tiempo actual es MENOR al límite, se puede liberar
-        if ($tiempo_actual < $tiempo_limite): 
+        if ($tiempo_actual > $tiempo_limite): 
     ?>
-        <!-- Botón para LIBERAR activo -->
-        <a href="<?php echo base_url('actualizarEstado/'.$row->id_reserva); ?>" class="btn-cancelar">
-            Liberar
-        </a>
-
-    <?php else: ?>
         <!-- Lo que se muestra si ya pasó la hora -->
         <span style="color: #999; font-size: 0.85em; font-style: italic;">
             Finalizada

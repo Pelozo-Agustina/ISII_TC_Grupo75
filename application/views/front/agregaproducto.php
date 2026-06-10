@@ -14,7 +14,7 @@
 				<div class="container"> 
 <!--<div class="container1">-->
 	<div class="well col-lg-8">
-		<h2>Cargar nuevo producto</h2>
+		<h2>Agregar nuevo producto</h2>
 		<h6> <b>Acepta imagenes gif, jpg, jpeg, png</b></h6>
 		<h6> <b>Tamaño maximo de la imagen 2MB</b></h6>	
 	</div>
@@ -101,7 +101,7 @@
 						</div>
 					</div>
 					<div class="col-lg-3 col-lg-offset-5">
-						<?php echo form_submit('submit', 'Cargar',"class='btn btn-lg btn-primary btn-block'"); ?> <br>
+						<?php echo form_submit('submit', 'Agregar Producto',"class='btn btn-lg btn-primary btn-block'"); ?> <br>
 						<?php echo form_close(); ?>
 					</div>
 				</fieldset>
