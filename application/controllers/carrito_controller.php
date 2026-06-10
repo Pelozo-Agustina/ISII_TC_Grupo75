@@ -107,20 +107,45 @@ class Carrito_controller extends CI_Controller {
 	//Agrega elemento al carrito
 	function añadirCarrito()
 {
-    // Genera array para insertar en el carrito incluyendo el stock dinámico
-    $insert_data = array(
-        'id'    => $this->input->post('id'),
-        'name'  => $this->input->post('descripcion'),
-        'price' => $this->input->post('precio_venta'),
-        'qty'   => 1,
-        'stock' => $this->input->post('stock') // <--- AGREGAMOS ESTA LÍNEA
-    );	
+    // ── PATRÓN STATE: consultar el estado real del producto desde la BD
+    //    No confiamos en el valor que viene del formulario (podría manipularse)
+    $id = $this->input->post('id');
+    $resultado = $this->producto_model->edit_producto($id);
 
-    // Inserta elemento al carrito
+    if (!$resultado) {
+        $this->session->set_flashdata('error_carrito', 'El producto no existe.');
+        header('Location: ' . $_SERVER['HTTP_REFERER']);
+        return;
+    }
+
+    $row = $resultado->row();
+
+    // Instanciar el objeto de estado según el valor en BD
+    $estadoProducto = (trim($row->eliminado) === 'SI')
+        ? new ProductoInactivo()
+        : new ProductoActivo();
+
+    // puedeVenderse() decide si el producto puede agregarse al carrito
+    // ProductoActivo   → true  → continúa
+    // ProductoInactivo → false → bloquea con mensaje
+    if (!$estadoProducto->puedeVenderse()) {
+        $this->session->set_flashdata('error_carrito',
+            'El producto "' . htmlspecialchars($row->descripcion) . '" no está disponible.');
+        header('Location: ' . $_SERVER['HTTP_REFERER']);
+        return;
+    }
+
+    // Producto activo: insertar en el carrito con datos de la BD (no del form)
+    $insert_data = array(
+        'id'    => $row->id,
+        'name'  => $row->descripcion,
+        'price' => $row->precio_venta,
+        'qty'   => 1,
+        'stock' => $row->stock
+    );
+
     $this->cart->insert($insert_data);
-      
-    // Redirige a la misma página que se encuentra
-    header('Location: '.$_SERVER['HTTP_REFERER']);
+    header('Location: ' . $_SERVER['HTTP_REFERER']);
 }
 
 	

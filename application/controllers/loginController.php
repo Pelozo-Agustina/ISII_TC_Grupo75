@@ -49,14 +49,16 @@ class LoginController extends CI_Controller {
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger">', '</div>');
         
         if ($this->form_validation->run() == FALSE)
-        {   
-            // CORRECCIÓN: Orden lógico de carga de vistas (Estructura HTML correcta)
-            $data = array('titulo' => 'Error de datos o Login');
-            $this->load->view('partes/head_view', $data);
-            $this->load->view('partes/navbar_view');
-            $this->load->view('login');
-            $this->load->view('partes/footer_view');
-        }
+{   
+    // Definimos los datos que van a usar las vistas (como el título de la pestaña)
+    $data = array('titulo' => 'Error de datos o Login');
+    
+    // Cargamos la estructura en el orden correcto pasando la variable $data
+    $this->load->view('partes/head_view', $data);
+    $this->load->view('partes/navbar_view', $data);
+    $this->load->view('login', $data);
+    $this->load->view('partes/footer_view', $data);
+}
         else 
         {
             // PASO 3: EJECUCIÓN DEL PATRÓN STRATEGY

@@ -1,135 +1,135 @@
 <?php 
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-	class Producto_controller extends CI_Controller{
-		
-		function __construct() 
-		{
-			parent::__construct();
+    class Producto_controller extends CI_Controller{
+        
+        function __construct() 
+        {
+            parent::__construct();
         $this->load->model('producto_model');
-		}
+        }
 
-		private function _veri_log()
-    	{
-	    	if ($this->session->userdata('login_in')) 
-	    	{
-	    		return TRUE;
-	    	} else {
-	    		return FALSE;
-	    	}
-    	}
-		
-		/**
-	    * Muestra todos los productos en tabla
-	    */
-		function index()
-		{
-			if($this->_veri_log()){
-			$data = array('titulo' => 'productos');
-		
-			$session_data = $this->session->userdata('login_in');
-			$data['perfil_id'] = $session_data['perfil_id'];
-			$data['nombre'] = $session_data['nombre'];
+        private function _veri_log()
+        {
+            if ($this->session->userdata('login_in')) 
+            {
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+        }
+        
+        /**
+        * Muestra todos los productos en tabla
+        */
+        function index()
+        {
+            if($this->_veri_log()){
+            $data = array('titulo' => 'productos');
+        
+            $session_data = $this->session->userdata('login_in');
+            $data['perfil_id'] = $session_data['perfil_id'];
+            $data['nombre'] = $session_data['nombre'];
 
-			$dat = array('productos' => $this->producto_model->get_productos() );
+            $dat = array('productos' => $this->producto_model->get_productos() );
 
-			$this->load->view('partes/head_view', $data);
-			$this->load->view('partes/navbar_view');
-			$this->load->view('front/muestraproductos', $dat);
-			$this->load->view('partes/footer_view');
-			}else{
-			redirect('login', 'refresh'); }
-		}
+            $this->load->view('partes/head_view', $data);
+            $this->load->view('partes/navbar_view');
+            $this->load->view('front/muestraproductos', $dat);
+            $this->load->view('partes/footer_view');
+            }else{
+            redirect('login', 'refresh'); }
+        }
 
-		
-		/**
-	    * Muestra todas las Bebidas calientes 
-	    */
-		function muestra_BebidasCalientes()
-		{
-			if($this->_veri_log()){
-			$data = array('titulo' => 'BebidasCaliente');
-		
-			$session_data = $this->session->userdata('login_in');
-			$data['perfil_id'] = $session_data['perfil_id'];
-			$data['nombre'] = $session_data['nombre'];
+        
+        /**
+        * Muestra todas las Bebidas calientes 
+        */
+        function muestra_BebidasCalientes()
+        {
+            if($this->_veri_log()){
+            $data = array('titulo' => 'BebidasCaliente');
+        
+            $session_data = $this->session->userdata('login_in');
+            $data['perfil_id'] = $session_data['perfil_id'];
+            $data['nombre'] = $session_data['nombre'];
 
-			$dat = array('productos' => $this->producto_model->get_bebidasCalientes() );
+            $dat = array('productos' => $this->producto_model->get_bebidasCalientes() );
 
-			$this->load->view('partes/head_view', $data);
-			$this->load->view('partes/navbar_view', $data);
-			$this->load->view('flont/muestraBebidasCalientes', $dat);
-			$this->load->view('partes/footer_view');
-			}else{
-			redirect('login', 'refresh'); }
-		}
+            $this->load->view('partes/head_view', $data);
+            $this->load->view('partes/navbar_view', $data);
+            $this->load->view('flont/muestraBebidasCalientes', $dat);
+            $this->load->view('partes/footer_view');
+            }else{
+            redirect('login', 'refresh'); }
+        }
 
-		
-		/**
-	    * Muestra todas las Bebbidas Frias
-	    */
-		function muestra_BebidasFrias()
-		{
-			if($this->_veri_log()){
-			$data = array('titulo' => 'BebidasFria');
-		
-			$session_data = $this->session->userdata('login_in');
-			$data['perfil_id'] = $session_data['perfil_id'];
-			$data['nombre'] = $session_data['nombre'];
+        
+        /**
+        * Muestra todas las Bebbidas Frias
+        */
+        function muestra_BebidasFrias()
+        {
+            if($this->_veri_log()){
+            $data = array('titulo' => 'BebidasFria');
+        
+            $session_data = $this->session->userdata('login_in');
+            $data['perfil_id'] = $session_data['perfil_id'];
+            $data['nombre'] = $session_data['nombre'];
 
-			$dat = array('productos' => $this->producto_model->get_bebidasFrias() );
+            $dat = array('productos' => $this->producto_model->get_bebidasFrias() );
 
-			$this->load->view('partes/head_view', $data);
-			$this->load->view('partes/navbar_view');
-			$this->load->view('front/muestraBebidasFrias', $dat);
-			$this->load->view('partes/footer_view');
-			}else{
-			redirect('login', 'refresh'); }
-		}
-		
-		/***/
+            $this->load->view('partes/head_view', $data);
+            $this->load->view('partes/navbar_view');
+            $this->load->view('front/muestraBebidasFrias', $dat);
+            $this->load->view('partes/footer_view');
+            }else{
+            redirect('login', 'refresh'); }
+        }
+        
+        /***/
 
-		function muestra_ParaAcom()
-		{
-			if($this->_veri_log()){
-			$data = array('titulo' => 'ParaAcom');
-		
-			$session_data = $this->session->userdata('login_in');
-			$data['perfil_id'] = $session_data['perfil_id'];
-			$data['nombre'] = $session_data['nombre'];
+        function muestra_ParaAcom()
+        {
+            if($this->_veri_log()){
+            $data = array('titulo' => 'ParaAcom');
+        
+            $session_data = $this->session->userdata('login_in');
+            $data['perfil_id'] = $session_data['perfil_id'];
+            $data['nombre'] = $session_data['nombre'];
 
-			$dat = array('productos' => $this->producto_model->get_paraAcom() );
+            $dat = array('productos' => $this->producto_model->get_paraAcom() );
 
-			$this->load->view('partes/head_view', $data);
-			$this->load->view('partes/navbar_view');
-			$this->load->view('front/muestraParaAcom', $dat);
-			$this->load->view('partes/footer_view');
-			}else{
-			redirect('login', 'refresh'); }
-		}
-		
+            $this->load->view('partes/head_view', $data);
+            $this->load->view('partes/navbar_view');
+            $this->load->view('front/muestraParaAcom', $dat);
+            $this->load->view('partes/footer_view');
+            }else{
+            redirect('login', 'refresh'); }
+        }
+        
 
-		/**
-	    * Muestra formulario para agregar producto
-	    */
-		function form_agrega_producto()  	//Si se modifica, modificar (agrega_producto) tambien
-		{
-			if($this->_veri_log()){
-			$data = array('titulo' => 'Agregar Producto');
-		
-			$session_data = $this->session->userdata('login_in');
-			$data['perfil_id'] = $session_data['perfil_id'];
-			$data['nombre'] = $session_data['nombre'];
+        /**
+        * Muestra formulario para agregar producto
+        */
+        function form_agrega_producto()     //Si se modifica, modificar (agrega_producto) tambien
+        {
+            if($this->_veri_log()){
+            $data = array('titulo' => 'Agregar Producto');
+        
+            $session_data = $this->session->userdata('login_in');
+            $data['perfil_id'] = $session_data['perfil_id'];
+            $data['nombre'] = $session_data['nombre'];
 
-			$this->load->view('partes/head_view', $data);
-			$this->load->view('partes/navbar_view');
-			$this->load->view('front/agregaproducto');
-			$this->load->view('partes/footer_view');
-			}else{
-			redirect('login', 'refresh'); }
-		}
+            $this->load->view('partes/head_view', $data);
+            $this->load->view('partes/navbar_view');
+            $this->load->view('front/agregaproducto');
+            $this->load->view('partes/footer_view');
+            }else{
+            redirect('login', 'refresh'); }
+        }
 
-		function agrega_producto()
+        function agrega_producto()
 {
     $this->load->library('form_validation');
     $this->load->helper('form');
@@ -190,14 +190,14 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
     }
 }
 
-		
-		/**
-		* Obtiene los datos del archivo imagen.
-		* Permite archivos gif, jpg, png
-		* Verifica si los datos son correcto en conjunto con la imagen y lo inserta en la tabla correspondiente
-		* En la tabla guarda la URL de donde se encuentra la imagen.
-		*/
-		function _image_upload()
+        
+        /**
+        * Obtiene los datos del archivo imagen.
+        * Permite archivos gif, jpg, png
+        * Verifica si los datos son correcto en conjunto con la imagen y lo inserta en la tabla correspondiente
+        * En la tabla guarda la URL de donde se encuentra la imagen.
+        */
+        function _image_upload()
 {
     if (empty($_FILES['filename']['name'])) {
         $this->form_validation->set_message('_image_upload', '<div class="alert alert-danger">La imagen del producto es obligatoria.</div>');
@@ -226,306 +226,385 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
     }
 }
 
-		/**
-	    * Muestra para modificar un producto
-	    */
-		function muestra_modificar()
-		{
-			$id = $this->uri->segment(2);
-			$datos_producto = $this->producto_model->edit_producto($id);
+        /**
+        * Muestra para modificar un producto
+        */
+        function muestra_modificar()
+        {
+            $id = $this->uri->segment(2);
+            $datos_producto = $this->producto_model->edit_producto($id);
 
-			if ($datos_producto != FALSE) {
-				foreach ($datos_producto->result() as $row) 
-				{
-					$descripcion = $row->descripcion;
-					$categoria_id = $row->categoria_id;
-					$imagen = $row->imagen;
-					$precio_costo = $row->precio_costo;
-					$precio_venta = $row->precio_venta;
-					$stock = $row->stock;
-					$stock_min = $row->stock_min;	
-				}
+            if ($datos_producto != FALSE) {
+                foreach ($datos_producto->result() as $row) 
+                {
+                    $descripcion = $row->descripcion;
+                    $categoria_id = $row->categoria_id;
+                    $imagen = $row->imagen;
+                    $precio_costo = $row->precio_costo;
+                    $precio_venta = $row->precio_venta;
+                    $stock = $row->stock;
+                    $stock_min = $row->stock_min;   
+                }
 
-				$dat = array('productos' =>$datos_producto,
-					'id'=>$id,
-					'descripcion'=>$descripcion,
-					'categoria_id'=>$categoria_id,
-					'imagen'=>$imagen,
-					'precio_costo'=>$precio_costo,
-					'precio_venta'=>$precio_venta,
-					'stock'=>$stock,
-					'stock_min'=>$stock_min
-				);
-			} 
-			else 
-			{
-				return FALSE;
-			}
-			if($this->_veri_log()){
-			$data = array('titulo' => 'Modificar Producto');
-			$session_data = $this->session->userdata('login_in');
-			$data['perfil_id'] = $session_data['perfil_id'];
-			$data['nombre'] = $session_data['nombre'];
+                $dat = array('productos' =>$datos_producto,
+                    'id'=>$id,
+                    'descripcion'=>$descripcion,
+                    'categoria_id'=>$categoria_id,
+                    'imagen'=>$imagen,
+                    'precio_costo'=>$precio_costo,
+                    'precio_venta'=>$precio_venta,
+                    'stock'=>$stock,
+                    'stock_min'=>$stock_min
+                );
+            } 
+            else 
+            {
+                return FALSE;
+            }
+            if($this->_veri_log()){
+            $data = array('titulo' => 'Modificar Producto');
+            $session_data = $this->session->userdata('login_in');
+            $data['perfil_id'] = $session_data['perfil_id'];
+            $data['nombre'] = $session_data['nombre'];
 
-			$this->load->view('partes/head_view');
-			//$this->load->view('partes/navbar_view');
-			$this->load->view('front/modificaproducto', $dat);
-			$this->load->view('partes/footer_view');
-			}else{
-			redirect('login', 'refresh');}
-		}
-
-		/**
-	    * Verifica datos para modificar un producto
-	    */
-		function modificar_producto()
-		{
-			//Validación del formulario
-			$this->form_validation->set_rules('descripcion', 'Descripcion', 'required');
-			$this->form_validation->set_rules('categoria_id', 'Categoria', 'required');
-			$this->form_validation->set_rules('precio_costo', 'Precio Costo', 'required|numeric');
-			$this->form_validation->set_rules('precio_venta', 'Precio Venta', 'required|numeric');
-			$this->form_validation->set_rules('stock', 'Stock', 'required|numeric');
-			$this->form_validation->set_rules('stock_min', 'Stock Minimo', 'required|numeric');
-			
-
-			//Mensaje del form_validation
-			$this->form_validation->set_message('required','<div class="alert alert-danger">El campo %s es obligatorio, al intentar modificar estaba vacio</div>');
-
-			$this->form_validation->set_message('numeric','<div class="alert alert-danger">El campo %s debe contener un valor numérico, al intentar modificar estaba vacio</div>'); 
-
-			$id = $this->uri->segment(2);
-			$datos_producto = $this->producto_model->edit_producto($id);
-
-			foreach ($datos_producto->result() as $row) 
-			{
-				$imagen = $row->imagen;
-			}
-
-			$dat = array(
-				'id'=>$id,
-				'descripcion'=>$this->input->post('descripcion',true),
-				'categoria_id'=>$this->input->post('categoria_id',true),
-				'imagen'=>$imagen,
-				'precio_costo'=>$this->input->post('precio_costo',true),
-				'precio_venta'=>$this->input->post('precio_venta',true),
-				'stock'=>$this->input->post('stock',true),
-				'stock_min'=>$this->input->post('stock_min',true)
-			);
-
-			if ($this->form_validation->run()==FALSE)
-			{
-				$data = array('titulo' => 'Error de formulario');
-				$session_data = $this->session->userdata('login_in');
-				$data['perfil_id'] = $session_data['perfil_id'];
-				$data['nombre'] = $session_data['nombre'];
-
-				$this->load->view('partes/head_view', $data);
-				$this->load->view('partes/navbar_view',$data);
-				$this->load->view('front/modificaproducto', $dat);
-				$this->load->view('partes/footer_view');
-			}
-			else
-			{
-				$this->_image_modif();		
-			}
-			
-		}
-
-		/**
-		* Obtiene los datos del archivo imagen.
-		* Permite archivos gif, jpg, png
-		* Verifica si los datos son correcto en conjunto con la imagen y lo inserta en la tabla correspondiente
-		* Si el campo imagen se encuentra vacio asume que la imagen no fue moficado.
-		* En la tabla guarda la URL de donde se encuentra la imagen.
-		*/
-		
-	    function _image_modif()
-	    {
-			//Cargo la libreria para subir archivos
-	    	$this->load->library('upload');
-
-			// Obtengo el id del libro
-	    	$id = $this->uri->segment(2);
-
-	        // Array de datos para obtener datos de libros sin la imagen 
-	    	$dat = array(
-				'id'=>$id,
-				'descripcion'=>$this->input->post('descripcion',true),
-				'categoria_id'=>$this->input->post('categoria_id',true),
-				'precio_costo'=>$this->input->post('precio_costo',true),
-				'precio_venta'=>$this->input->post('precio_venta',true),
-				'stock'=>$this->input->post('stock',true),
-				'stock_min'=>$this->input->post('stock_min',true)
-			);
-
-			// Si la iamgen esta vacia se asume que no se modifica
-	    	if (!empty($_FILES['filename']['name']))
-	    	{            
-	            // Especifica la configuración para el archivo
-	    		$config['upload_path'] = 'assets/img/productos';
-	    		$config['allowed_types'] = 'gif|jpg|jpeg|png';
-
-	    		$config['max_size'] = '6048';
-	    		$config['max_width']  = '6024';
-	    		$config['max_height']  = '4768';       
-
-	            // Inicializa la configuración para el archivo 
-	    		$this->upload->initialize($config);
-
-	    		if ($this->upload->do_upload('filename'))
-	    		{
-	                	// Mueve archivo a la carpeta indicada en la variable $data
-	    			$data = $this->upload->data();
-
-	                    // Path donde guarda el archivo..
-	    			$url ="assets/img/productos/".$_FILES['filename']['name'];
-
-	                 	// Agrego la imagen si se modifico.  
-	    			$dat['imagen']=$url;
-
-						// Actualiza datos del libro
-	    			$this->producto_model->update_producto($id, $dat);
-	    			redirect('productos_todos', 'refresh');
-	    		}
-	    		else
-	    		{
-	                	//Mensaje de error si no existe imagen correcta
-	    			$imageerrors = '<div class="alert alert-danger">El campo %s es incorrecta, extención incorrecto o excede el tamaño permitido que es de: 2MB </div>';
-	    			$this->form_validation->set_message('_image_modif',$imageerrors );
-	    			return false;
-	    		} 
-	    	}
-	    	else
-	    	{
-	    		$this->producto_model->update_producto($id, $dat);
-	    		redirect('productos_todos', 'refresh');
-	    	}
-	    }
-
-
-	    /**
-		* Obtiene los datos del producto a eliminar
-		*/
-	    function eliminar_producto(){
-	    	$id = $this->uri->segment(2); 
-	    	$data = array(
-	    		'eliminado'=>'SI'
-	    	);
-
-	    	$this->producto_model->estado_producto($id, $data);
-	    	redirect('productos_todos', 'refresh');
-	    }
-
-	    /**
-		* Obtiene los datos del producto a activar
-		*/
-	    function activar_producto(){
-	    	$id = $this->uri->segment(2);
-	    	$data = array(
-	    		'eliminado'=>'NO'
-	    	);
-
-	    	$this->producto_model->estado_producto($id, $data);
-	    	redirect('productos_todos', 'refresh');
-	    }
-
-	    /**
-		* Productos eliminados logicamente
-		*/
-	    function muestra_eliminados()
-	    {    	
-	    	if($this->_veri_log()){
-	    	$data = array('titulo' => 'Productos eliminados');
-			$session_data = $this->session->userdata('login_in');
-			$data['perfil_id'] = $session_data['perfil_id'];
-			$data['nombre'] = $session_data['nombre'];
-			
-			$dat = array(
-		        'productos' => $this->producto_model->not_active_productos()
-			);
-
-			$this->load->view('partes/head_view', $data);
-			$this->load->view('partes/navbar_view');
-			$this->load->view('front/muestraeliminados', $dat);
-			$this->load->view('partes/footer_view');
-			}else{
-			redirect('login', 'refresh');}
-		}
-	    
-/************************************************************************** 								Ventas
- **************************************************************************/
-	    function listar_ventas()
-	    { 
-             if($this->_veri_log()){
-			$data = array('titulo' => 'ventas');
-		
-			$session_data = $this->session->userdata('login_in');
-			$data['perfil_id'] = $session_data['perfil_id'];
-			$data['nombre'] = $session_data['nombre'];
-
-			$this->db->order_by('id_cabecera', 'ASC');
-
-			$dat = array('ventas_cabecera' => $this->producto_model->get_ventas_cabecera());
-
-			$this->load->view('partes/head_view',$data);
-			$this->load->view('partes/navbar_view',$data);
-			$this->load->view('usuario/muestraventas',$dat);
-			$this->load->view('partes/footer_view');
+            $this->load->view('partes/head_view');
+            //$this->load->view('partes/navbar_view');
+            $this->load->view('front/modificaproducto', $dat);
+            $this->load->view('partes/footer_view');
             }else{
-			redirect('login', 'refresh');
+            redirect('login', 'refresh');}
+        }
+
+        /**
+        * Verifica datos para modificar un producto
+        */
+        function modificar_producto()
+        {
+            //Validación del formulario
+            $this->form_validation->set_rules('descripcion', 'Descripcion', 'required');
+            $this->form_validation->set_rules('categoria_id', 'Categoria', 'required');
+            $this->form_validation->set_rules('precio_costo', 'Precio Costo', 'required|numeric');
+            $this->form_validation->set_rules('precio_venta', 'Precio Venta', 'required|numeric');
+            $this->form_validation->set_rules('stock', 'Stock', 'required|numeric');
+            $this->form_validation->set_rules('stock_min', 'Stock Minimo', 'required|numeric');
+            
+
+            //Mensaje del form_validation
+            $this->form_validation->set_message('required','<div class="alert alert-danger">El campo %s es obligatorio, al intentar modificar estaba vacio</div>');
+
+            $this->form_validation->set_message('numeric','<div class="alert alert-danger">El campo %s debe contener un valor numérico, al intentar modificar estaba vacio</div>'); 
+
+            $id = $this->uri->segment(2);
+            $datos_producto = $this->producto_model->edit_producto($id);
+
+            foreach ($datos_producto->result() as $row) 
+            {
+                $imagen = $row->imagen;
+            }
+
+            $dat = array(
+                'id'=>$id,
+                'descripcion'=>$this->input->post('descripcion',true),
+                'categoria_id'=>$this->input->post('categoria_id',true),
+                'imagen'=>$imagen,
+                'precio_costo'=>$this->input->post('precio_costo',true),
+                'precio_venta'=>$this->input->post('precio_venta',true),
+                'stock'=>$this->input->post('stock',true),
+                'stock_min'=>$this->input->post('stock_min',true)
+            );
+
+            if ($this->form_validation->run()==FALSE)
+            {
+                $data = array('titulo' => 'Error de formulario');
+                $session_data = $this->session->userdata('login_in');
+                $data['perfil_id'] = $session_data['perfil_id'];
+                $data['nombre'] = $session_data['nombre'];
+
+                $this->load->view('partes/head_view', $data);
+                $this->load->view('partes/navbar_view',$data);
+                $this->load->view('front/modificaproducto', $dat);
+                $this->load->view('partes/footer_view');
+            }
+            else
+            {
+                $this->_image_modif();      
+            }
+            
+        }
+
+        /**
+        * Obtiene los datos del archivo imagen.
+        * Permite archivos gif, jpg, png
+        * Verifica si los datos son correcto en conjunto con la imagen y lo inserta en la tabla correspondiente
+        * Si el campo imagen se encuentra vacio asume que la imagen no fue moficado.
+        * En la tabla guarda la URL de donde se encuentra la imagen.
+        */
+        
+        function _image_modif()
+        {
+            //Cargo la libreria para subir archivos
+            $this->load->library('upload');
+
+            // Obtengo el id del libro
+            $id = $this->uri->segment(2);
+
+            // Array de datos para obtener datos de libros sin la imagen 
+            $dat = array(
+                'id'=>$id,
+                'descripcion'=>$this->input->post('descripcion',true),
+                'categoria_id'=>$this->input->post('categoria_id',true),
+                'precio_costo'=>$this->input->post('precio_costo',true),
+                'precio_venta'=>$this->input->post('precio_venta',true),
+                'stock'=>$this->input->post('stock',true),
+                'stock_min'=>$this->input->post('stock_min',true)
+            );
+
+            // Si la iamgen esta vacia se asume que no se modifica
+            if (!empty($_FILES['filename']['name']))
+            {            
+                // Especifica la configuración para el archivo
+                $config['upload_path'] = 'assets/img/productos';
+                $config['allowed_types'] = 'gif|jpg|jpeg|png';
+
+                $config['max_size'] = '6048';
+                $config['max_width']  = '6024';
+                $config['max_height']  = '4768';       
+
+                // Inicializa la configuración para el archivo 
+                $this->upload->initialize($config);
+
+                if ($this->upload->do_upload('filename'))
+                {
+                        // Mueve archivo a la carpeta indicada en la variable $data
+                    $data = $this->upload->data();
+
+                        // Path donde guarda el archivo..
+                    $url ="assets/img/productos/".$_FILES['filename']['name'];
+
+                        // Agrego la imagen si se modifico.  
+                    $dat['imagen']=$url;
+
+                        // Actualiza datos del libro
+                    $this->producto_model->update_producto($id, $dat);
+                    redirect('productos_todos', 'refresh');
+                }
+                else
+                {
+                        //Mensaje de error si no existe imagen correcta
+                    $imageerrors = '<div class="alert alert-danger">El campo %s es incorrecta, extención incorrecto o excede el tamaño permitido que es de: 2MB </div>';
+                    $this->form_validation->set_message('_image_modif',$imageerrors );
+                    return false;
+                } 
+            }
+            else
+            {
+                $this->producto_model->update_producto($id, $dat);
+                redirect('productos_todos', 'refresh');
+            }
+        }
+
+
+        /**
+        * Obtiene los datos del producto a eliminar
+        */
+        function eliminar_producto(){
+            $id = $this->uri->segment(2); 
+            $data = array(
+                'eliminado'=>'SI'
+            );
+
+            $this->producto_model->estado_producto($id, $data);
+            redirect('productos_todos', 'refresh');
+        }
+
+        /**
+        * Obtiene los datos del producto a activar
+        */
+        function activar_producto(){
+            $id = $this->uri->segment(2);
+            $data = array(
+                'eliminado'=>'NO'
+            );
+
+            $this->producto_model->estado_producto($id, $data);
+            redirect('productos_todos', 'refresh');
+        }
+
+        /**
+        * Productos eliminados logicamente
+        */
+        function muestra_eliminados()
+        {       
+            if($this->_veri_log()){
+            $data = array('titulo' => 'Productos eliminados');
+            $session_data = $this->session->userdata('login_in');
+            $data['perfil_id'] = $session_data['perfil_id'];
+            $data['nombre'] = $session_data['nombre'];
+            
+            $dat = array(
+                'productos' => $this->producto_model->not_active_productos()
+            );
+
+            $this->load->view('partes/head_view', $data);
+            $this->load->view('partes/navbar_view');
+            $this->load->view('front/muestraeliminados', $dat);
+            $this->load->view('partes/footer_view');
+            }else{
+            redirect('login', 'refresh');}
+        }
+        
+/**************************************************************************                                 Ventas
+ **************************************************************************/
+        function listar_ventas()
+        { 
+             if($this->_veri_log()){
+            $data = array('titulo' => 'ventas');
+        
+            $session_data = $this->session->userdata('login_in');
+            $data['perfil_id'] = $session_data['perfil_id'];
+            $data['nombre'] = $session_data['nombre'];
+
+            $this->db->order_by('id_cabecera', 'ASC');
+
+            $dat = array('ventas_cabecera' => $this->producto_model->get_ventas_cabecera());
+
+            $this->load->view('partes/head_view',$data);
+            $this->load->view('partes/navbar_view',$data);
+            $this->load->view('usuario/muestraventas',$dat);
+            $this->load->view('partes/footer_view');
+            }else{
+            redirect('login', 'refresh');
             }
          }
         
         
+        /**
+         * Detalle de una venta — usa SP sp_detalle_venta_completo.
+         * Pasa a la vista:
+         *   $cabecera       → objeto con datos de la venta y del cliente
+         *   $ventas_detalle → array de objetos con lineas de detalle
+         */
         function muestra_detalle($id)
-		{ 
-             if($this->_veri_log()){
-			$data = array('titulo' => 'Detalle');
-		
-			$session_data = $this->session->userdata('login_in');
-			$data['perfil_id'] = $session_data['perfil_id'];
-			$data['nombre'] = $session_data['nombre'];
-                 
-			$dat = array('ventas_detalle' => $this->producto_model->get_ventas_detalle($id));
+        {
+            if ($this->_veri_log()) {
+                $session_data = $this->session->userdata('login_in');
 
-			$this->load->view('partes/head_view', $data);
-			//$this->load->view('partes/navbar_view', $data);
-			$this->load->view('usuario/muestradetalle', $dat);
-			$this->load->view('partes/footer_view');
-            }else{
-			redirect('login', 'refresh');
+                $data = array(
+                    'titulo'    => 'Detalle',
+                    'perfil_id' => $session_data['perfil_id'],
+                    'nombre'    => $session_data['nombre'],
+                );
+
+                // Llamada al SP: devuelve ['cabecera' => obj, 'detalle' => array]
+                $sp = $this->producto_model->sp_detalle_venta($id);
+
+                $dat = array(
+                    'cabecera'      => $sp['cabecera'],
+                    'ventas_detalle'=> $sp['detalle'],
+                );
+
+                $this->load->view('partes/head_view', $data);
+                $this->load->view('usuario/muestradetalle', $dat);
+                $this->load->view('partes/footer_view');
+            } else {
+                redirect('login', 'refresh');
+            }
+        }
+
+
+        /**
+         * Productos con stock bajo — usa SP sp_productos_stock_bajo.
+         * Ruta: producto_controller/stock_bajo  (agregar en routes.php si se desea URL amigable)
+         */
+        public function stock_bajo()
+        {
+            if ($this->_veri_log()) {
+                $session_data = $this->session->userdata('login_in');
+
+                $data = array(
+                    'titulo'    => 'Stock Bajo',
+                    'perfil_id' => $session_data['perfil_id'],
+                    'nombre'    => $session_data['nombre'],
+                );
+
+                $dat = array(
+                    'productos' => $this->producto_model->sp_stock_bajo(),
+                );
+
+                $this->load->view('partes/head_view',  $data);
+                $this->load->view('partes/navbar_view', $data);
+                $this->load->view('front/stock_bajo',  $dat);
+                $this->load->view('partes/footer_view');
+            } else {
+                redirect('login', 'refresh');
+            }
+        }
+
+
+        /**
+         * Reporte de ventas por periodo — usa SP sp_reporte_ventas_por_periodo.
+         * GET/POST con parametros fecha_inicio y fecha_fin.
+         * Ruta: producto_controller/reporte_ventas
+         */
+        public function reporte_ventas()
+        {
+            if ($this->_veri_log()) {
+                $session_data = $this->session->userdata('login_in');
+
+                $data = array(
+                    'titulo'    => 'Reporte de Ventas',
+                    'perfil_id' => $session_data['perfil_id'],
+                    'nombre'    => $session_data['nombre'],
+                );
+
+                $fecha_inicio = $this->input->get_post('fecha_inicio');
+                $fecha_fin    = $this->input->get_post('fecha_fin');
+
+                $dat = array('reporte' => []);
+
+                if ($fecha_inicio && $fecha_fin) {
+                    $dat['reporte']       = $this->producto_model->sp_reporte_ventas($fecha_inicio, $fecha_fin);
+                    $dat['fecha_inicio']  = $fecha_inicio;
+                    $dat['fecha_fin']     = $fecha_fin;
+                }
+
+                $this->load->view('partes/head_view',    $data);
+                $this->load->view('partes/navbar_view',  $data);
+                $this->load->view('usuario/reporte_ventas', $dat);
+                $this->load->view('partes/footer_view');
+            } else {
+                redirect('login', 'refresh');
             }
         }
 
 
 /************************************************************************** 
- * 									Reservas
+ *                                  Reservas
  **************************************************************************/
-		 //Funcion para Visualizar las Reservas
-		function muestra_reserva()
-		{
-			if($this->_veri_log()){
-			$data = array('titulo' => 'Muestra Reservas');
-		
-			$session_data = $this->session->userdata('login_in');
-			$data['perfil_id'] = $session_data['perfil_id'];
-			$data['nombre'] = $session_data['nombre'];
+         //Funcion para Visualizar las Reservas
+        function muestra_reserva()
+        {
+            if($this->_veri_log()){
+            $data = array('titulo' => 'Muestra Reservas');
+        
+            $session_data = $this->session->userdata('login_in');
+            $data['perfil_id'] = $session_data['perfil_id'];
+            $data['nombre'] = $session_data['nombre'];
 
-			$dat = array('reservas' => $this->producto_model->get_muestra_reserva()
-			);
+            $dat = array('reservas' => $this->producto_model->get_muestra_reserva()
+            );
 
-			$this->load->view('partes/head_view', $data);
-			$this->load->view('partes/navbar_view',$data);
-			$this->load->view('front/muestraReservas', $dat);
-			$this->load->view('partes/footer_view');
-			}else{
-			redirect('login', 'refresh'); }
-		}
+            $this->load->view('partes/head_view', $data);
+            $this->load->view('partes/navbar_view',$data);
+            $this->load->view('front/muestraReservas', $dat);
+            $this->load->view('partes/footer_view');
+            }else{
+            redirect('login', 'refresh'); }
+        }
 
 
-		//Funcion que Muestra las Reservas Confirmadas
-	function muestraReservasConfirmadas() {    	
+        //Funcion que Muestra las Reservas Confirmadas
+    function muestraReservasConfirmadas() {     
     if($this->_veri_log()){
         $session_data = $this->session->userdata('login_in');
         
@@ -542,12 +621,12 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
         $this->load->view('partes/footer_view');
     } else {
         redirect('login', 'refresh');
-    	}
-	}
+        }
+    }
 
 
 
-	public function get_reservas_confirmadas()
+    public function get_reservas_confirmadas()
 {
     $this->db->select('*');
     $this->db->from('reserva');
@@ -557,31 +636,31 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 }
 
 
-		
-		/**
-		//Muestra Reservas Canceladas
-		function muestraReservasCanceladas()
-	    {    	
-	    	if($this->_veri_log()){
-	    	$data = array('titulo' => 'Reservas Canceladas');
-			$session_data = $this->session->userdata('login_in');
-			$data['perfil_id'] = $session_data['perfil_id'];
-			$data['nombre'] = $session_data['nombre'];
-			
-			$dat = array(
-		        'reservas' => $this->producto_model->not_active_reservas()
-			);
+        
+        /**
+        //Muestra Reservas Canceladas
+        function muestraReservasCanceladas()
+        {       
+            if($this->_veri_log()){
+            $data = array('titulo' => 'Reservas Canceladas');
+            $session_data = $this->session->userdata('login_in');
+            $data['perfil_id'] = $session_data['perfil_id'];
+            $data['nombre'] = $session_data['nombre'];
+            
+            $dat = array(
+                'reservas' => $this->producto_model->not_active_reservas()
+            );
 
-			$this->load->view('partes/head_view', $data);
-			$this->load->view('partes/navbar_view');
-			$this->load->view('front/muestraReservasCanceladas', $dat);
-			$this->load->view('partes/footer_view');
-			}else{
-			redirect('login', 'refresh');}
-		} 
-		*/
+            $this->load->view('partes/head_view', $data);
+            $this->load->view('partes/navbar_view');
+            $this->load->view('front/muestraReservasCanceladas', $dat);
+            $this->load->view('partes/footer_view');
+            }else{
+            redirect('login', 'refresh');}
+        } 
+        */
 
-		public function confirmarReserva($id) {
+        public function confirmarReserva($id) {
     if($this->_veri_log()){
         // Cargamos la base de datos por seguridad
         $this->load->database();
@@ -601,68 +680,68 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
     }
 }
 
-		/**
-		* Obtiene los datos de la reserva cancelada
-		
-	    function cancelar_reserva(){
-	    	$id = $this->uri->segment(2); 
-	    	$data = array(
-	    		'estado_id'=>'Pendiente'
-	    	);
+        /**
+        * Obtiene los datos de la reserva cancelada
+        
+        function cancelar_reserva(){
+            $id = $this->uri->segment(2); 
+            $data = array(
+                'estado_id'=>'Pendiente'
+            );
 
-	    	$this->producto_model->estado_reserva($id, $data);
-	    	redirect('muestraReservas', 'refresh');
-	    }*/
+            $this->producto_model->estado_reserva($id, $data);
+            redirect('muestraReservas', 'refresh');
+        }*/
 
-	    /**
-		* Obtiene los datos de activar reservas
-		
-	    function activar_reserva(){
-	    	$id = $this->uri->segment(2);
-	    	$data = array(
-	    		'estado_id'=>'Confirmada'
-	    	);
+        /**
+        * Obtiene los datos de activar reservas
+        
+        function activar_reserva(){
+            $id = $this->uri->segment(2);
+            $data = array(
+                'estado_id'=>'Confirmada'
+            );
 
-	    	$this->producto_model->estado_reserva($id, $data);
-	    	redirect('muestraReservas', 'refresh');
-	    }*/
+            $this->producto_model->estado_reserva($id, $data);
+            redirect('muestraReservas', 'refresh');
+        }*/
 
-	    //muestra reservas
-	    public function get_muestra_reserva() {
-    	$this->db->select("r.id_reserva, u.nombre_usuario, r.fecha_reserva, m.descripcion AS mesa, 
+        //muestra reservas
+        public function get_muestra_reserva() {
+        $this->db->select("r.id_reserva, u.nombre_usuario, r.fecha_reserva, m.descripcion AS mesa, 
                        CONCAT(h.hora_inicio, ' a ', h.hora_fin) AS horario, r.estado_reserva");
-    	$this->db->from('reservas r');
-   	 	$this->db->join('usuarios u', 'r.id_usuario = u.id_usuario');
-    	$this->db->join('mesa m', 'r.id_mesa = m.id_mesa');
-    	$this->db->join('horario h', 'r.id_horario = h.id_horario');
-    	// Traemos las que no estén canceladas para la vista principal
-    	$this->db->where('r.estado_reserva !=', 'Pendiente'); 
+        $this->db->from('reservas r');
+        $this->db->join('usuarios u', 'r.id_usuario = u.id_usuario');
+        $this->db->join('mesa m', 'r.id_mesa = m.id_mesa');
+        $this->db->join('horario h', 'r.id_horario = h.id_horario');
+        // Traemos las que no estén canceladas para la vista principal
+        $this->db->where('r.estado_reserva !=', 'Pendiente'); 
     
-   		 $query = $this->db->get();
-   		 return ($query->num_rows() > 0) ? $query : false;
-		}
+         $query = $this->db->get();
+         return ($query->num_rows() > 0) ? $query : false;
+        }
 
-		//Funcion Realizar reserva
-		/**function realizar_reserva()
-		{
-			if($this->_veri_log()){
-			$data = array('titulo' => 'Hacer Reservas');
-		
-			$session_data = $this->session->userdata('login_in');
-			$data['perfil_id'] = $session_data['perfil_id'];
-			$data['nombre'] = $session_data['nombre'];
+        //Funcion Realizar reserva
+        /**function realizar_reserva()
+        {
+            if($this->_veri_log()){
+            $data = array('titulo' => 'Hacer Reservas');
+        
+            $session_data = $this->session->userdata('login_in');
+            $data['perfil_id'] = $session_data['perfil_id'];
+            $data['nombre'] = $session_data['nombre'];
 
-			$dat = array('reservas' => $this->producto_model->get_muestra_reserva()
-			);
+            $dat = array('reservas' => $this->producto_model->get_muestra_reserva()
+            );
 
-			$this->load->view('partes/head_view', $data);
-			$this->load->view('partes/navbar_view',$data);
-			$this->load->view('front/pagina_reservas', $dat);
-			$this->load->view('partes/footer_view');
-			}else{
-			redirect('login', 'refresh'); }
-		}*/
-		function realizar_reserva()
+            $this->load->view('partes/head_view', $data);
+            $this->load->view('partes/navbar_view',$data);
+            $this->load->view('front/pagina_reservas', $dat);
+            $this->load->view('partes/footer_view');
+            }else{
+            redirect('login', 'refresh'); }
+        }*/
+        function realizar_reserva()
 {
     date_default_timezone_set('America/Argentina/Buenos_Aires');
 
@@ -751,7 +830,7 @@ public function actualizarEstado($id) {
     if($this->_veri_log()){
         // Ejecutamos el cambio en el modelo
         if($this->producto_model->toggle_estado_reserva($id)){
-            $this->session->set_flashdata('success', 'El estado se actualizó correctamente.');
+            $this->session->set_flashdata('success', 'El estado de la reserva se actualizó correctamente.');
         }
         
         // Magia: Redirigimos al usuario de vuelta a la página desde donde vino
@@ -761,6 +840,9 @@ public function actualizarEstado($id) {
         redirect('login', 'refresh');
     }
 }
+
+//
+
 
 }
 

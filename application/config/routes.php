@@ -118,6 +118,12 @@ $route['visualizardatos'] = 'registro_controller/visualizardatos';
 
 
 
+$route['stock_bajo'] = 'producto_controller/stock_bajo';
+$route['reporte_ventas'] = 'producto_controller/reporte_ventas';
+
+
+
+
 
 
 /************************************************************************** 
@@ -137,6 +143,8 @@ $route['realizar_reserva'] = 'producto_controller/realizar_reserva';
 /************************************************************************** 
 							Rutas Carrito
 **************************************************************************/
+
+//rutas carrito
 $route['BebidasC'] = 'carrito_controller/mostrarBebidasC';
 $route['BebidasF'] = 'carrito_controller/mostrarBebidasF';
 $route['ParaA'] = 'carrito_controller/mostrarParaAcom';
