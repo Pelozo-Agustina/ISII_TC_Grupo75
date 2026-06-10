@@ -23,12 +23,21 @@
             </div>
 
         <?php } else { ?>           
-            <div class="container">
+            
                 <div class="well" style="background: transparent; border: none; box-shadow: none;">
                     <center><h1><b>Ventas Realizadas</b></h1></center>
                 </div>	
+                <td style="padding: 14px; border-top: 1px solid #eeeeee; border-bottom: none; border-left: none; border-right: none; text-align: center;">
+                                    <a href="<?php echo base_url("reporte_ventas/$row->id_cabecera"); ?>" 
+                                       class="btn btn-sm btn-detalle" 
+                                       style="background-color: #f3ece6; color: #4a2c11; border: 1px solid #4a2c11; border-radius: 20px; padding: 6px 22px; font-weight: bold; font-size: 13px; text-decoration: none; display: inline-block; transition: all 0.2s ease;">
+                                        Ventas por Periodo
+                                    </a>
+                                </td><br>
                 <br>
                 
+
+
                 <!-- EL CAMBIO CLAVE: Envolvemos la tabla en este div contenedor con bordes redondeados y una sombra sutil -->
                 <div style="border-radius: 14px; overflow: hidden; border: 1px solid #e2e2e2; box-shadow: 0 4px 12px rgba(0,0,0,0.05); background: #ffffff;">
                     

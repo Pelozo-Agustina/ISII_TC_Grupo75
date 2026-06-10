@@ -51,14 +51,6 @@
                         <?php echo($usuario) ?> 
                     </td>
                 </tr>
-                <tr>
-                    <td>
-                        Contraseña:
-                    </td>
-                    <td> 
-                        <?php echo($pass) ?> 
-                    </td>
-                </tr>
             </table>
             <br>  
         </div>
