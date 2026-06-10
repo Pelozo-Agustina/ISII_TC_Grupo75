@@ -127,11 +127,11 @@
 								<div class="title-div justify-content-between d-flex">
 									<h4>Cappuccino</h4>
 									<p class="price float-right">
-										$2,600
+										$4,000
 									</p>
 								</div>
 								<p>
-									Expreso con leche vaporizada de textura cremosa
+									Combinación de espresso y leche emulsionada, coronada con una densa y aterciopelada crema.
 								</p>								
 							</div>
 						</div>
@@ -140,11 +140,11 @@
 								<div class="title-div justify-content-between d-flex">
 									<h4>Americano</h4>
 									<p class="price float-right">
-										$2,800
+										$3,600
 									</p>
 								</div>
 								<p>
-									Mezcla de agua caliente y café procesado en un máquina de Expreso.
+									Infusión ligera y equilibrada de espresso con agua caliente para revelar sus matices más sutiles.
 								</p>								
 							</div>
 						</div>
@@ -153,11 +153,11 @@
 								<div class="title-div justify-content-between d-flex">
 									<h4>Espresso</h4>
 									<p class="price float-right">
-										$2,500
+										$3,000
 									</p>
 								</div>
 								<p>
-									Bebida corta con caracter, intensa y concentrada.
+									Extracción corta de café puro con cuerpo robusto, notas intensas y persistente crema avellana.
 								</p>								
 							</div>
 						</div>	
@@ -166,11 +166,11 @@
 								<div class="title-div justify-content-between d-flex">
 									<h4>Macchiato</h4>
 									<p class="price float-right">
-										$30,10
+										$3,300
 									</p>
 								</div>
 								<p>
-									Un expreso con una pequeña cantidad de leche caliente y espumada.
+									 Nuestro espresso insignia, delicadamente manchado con una sutil corona de espuma de leche.
 								</p>								
 							</div>
 						</div>
@@ -179,12 +179,12 @@
 								<div class="title-div justify-content-between d-flex">
 									<h4>Mocca</h4>
 									<p class="price float-right">
-										$2,500
+										$4,500
 									</p>
 								</div>
 								<p>
 									
-									Intensa combinacion de cafe y chocolate
+									Armonía perfecta donde el espresso se funde con la seducción del chocolate y la leche vaporizada.
 
 								</p>								
 							</div>
@@ -194,11 +194,11 @@
 								<div class="title-div justify-content-between d-flex">
 									<h4>Coffee Latte</h4>
 									<p class="price float-right">
-										$3,100
+										$4,200
 									</p>
 								</div>
 								<p>
-									Mezcla de espresso cubierta de leche vaporizada.
+									Delicada base de espresso fundida en un cuerpo sedoso de leche para una experiencia envolvente.
 								</p>								
 							</div>
 						</div>
@@ -207,11 +207,11 @@
 								<div class="title-div justify-content-between d-flex">
 									<h4>Piccolo Latte</h4>
 									<p class="price float-right">
-										$1,600
+										$3,500
 									</p>
 								</div>
 								<p>
-									Inyeccion de Ristretto cubierta con leche.
+									 Dosis concentrada de ristretto con una pequeña proporción de leche que ofrece un sabor intenso.
 								</p>								
 							</div>
 						</div>
@@ -220,24 +220,24 @@
 								<div class="title-div justify-content-between d-flex">
 									<h4>Ristretto</h4>
 									<p class="price float-right">
-										$2,000
+										$3,000
 									</p>
 								</div>
 								<p>
-									Café expreso hecho con la cantidad normal de café molido.
+									Extracción ultra corta y concentrada para potenciar la dulzura natural y minimizar el amargor.
 								</p>								
 							</div>
 						</div>
 						<div class="col-lg-4">
 							<div class="single-menu">
 								<div class="title-div justify-content-between d-flex">
-									<h4>Caffogato</h4>
+									<h4>Affogato</h4>
 									<p class="price float-right">
-										$1,700
+										$4,500
 									</p>
 								</div>
 								<p>
-									Helado cubierto o "ahogado" con un trago de espresso caliente.
+									Una sofisticada bocha de helado artesanal ahogada bajo un intenso shot de espresso caliente.
 								</p>								
 							</div>
 						</div>															
