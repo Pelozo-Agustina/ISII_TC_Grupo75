@@ -46,24 +46,6 @@
 		}
 				}
 
-
-	/*Mostrar Datos
-	$idUser = $_GET['id'];
-	$sql = mysql_query($conection,"SELECT u.nombre,u.apellido,u.email,u.usuario,u.pass FROM usuarios u WHERE id = $idUser");
-	$result_sql = mysql_num_rows($sql);
-	if($result_sql == 0){
-		header('location: misdatos');
-	}else{
-
-		while ($data = mysql_fetch_array($sql)) {
-			# code...
-			$nombre = $data['nombre'];
-			$apellido = $data['apellido'];
-			$email = $data['email'];
-			$usuario = $data['usuario'];
-			$pass = $data['pass'];
-		}
-	}*/
 		
  ?>
 
