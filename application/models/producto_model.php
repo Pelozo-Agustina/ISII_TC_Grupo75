@@ -29,7 +29,7 @@ class Producto_model extends CI_Model{
     /**
     * Retorna todos las bebidas calientes
     */
-    function get_BebidasCalientes()
+    function get_bebidasCalientes()
     {
         $query = $this->db->get_where('productos', array('eliminado' => 'NO', 'categoria_id' => '1'));
         
@@ -99,17 +99,45 @@ class Producto_model extends CI_Model{
         }
     }
 
+    
     /**
-    * Eliminación y activación logica de un producto
-    */
-    function estado_producto($id, $data){
+     * Cambia el estado lógico de un producto (eliminado = 'SI' / 'NO').
+     * Implementa la baja y reactivación lógica.
+     */
+    public function estado_producto($id, $data)
+    {
         $this->db->where('id', $id);
-        $query = $this->db->update('productos', $data);
-        if($query) {
-            return TRUE;
-        } else {
-            return FALSE;
+        return $this->db->update('productos', $data) ? TRUE : FALSE;
+    }
+
+    /**
+     * Llama a sp_actualizar_stock_producto para descontar unidades tras una venta.
+     *
+     * @param  int $id_producto   ID del producto a actualizar
+     * @param  int $cantidad      Unidades vendidas a descontar
+     * @return int  0 = éxito, 1 = producto inactivo/no encontrado, 2 = sin stock
+     */
+    public function sp_actualizar_stock(int $id_producto, int $cantidad): int
+    {
+        $conn = $this->db->conn_id;
+
+        $stmt = mysqli_prepare(
+            $conn,
+            "CALL sp_actualizar_stock_producto(?, ?, @resultado)"
+        );
+        mysqli_stmt_bind_param($stmt, 'ii', $id_producto, $cantidad);
+        mysqli_stmt_execute($stmt);
+        mysqli_stmt_close($stmt);
+
+        while (mysqli_more_results($conn) && mysqli_next_result($conn)) {
+            if ($rs = mysqli_store_result($conn)) {
+                mysqli_free_result($rs);
+            }
         }
+
+        $qr  = mysqli_query($conn, "SELECT @resultado AS resultado");
+        $row = mysqli_fetch_assoc($qr);
+        return (int) ($row['resultado'] ?? 1);
     }
 
     /**
@@ -307,30 +335,6 @@ public function toggle_estado_reserva($id) {
 
 
 
-/**
- * No lo utilizamos ya que aplicamos patron State
-
-public function toggle_estado_reserva($id) {
-    // 1. Consultamos el registro en la base de datos
-    $this->db->where('id_reserva', $id);
-    $query = $this->db->get('reservas');
-    
-    // CONTROL CRÍTICO DE SEGURIDAD: Verificamos si realmente existe el registro
-    if ($query->num_rows() == 0) {
-        return FALSE; // Evita el Error 500 si la reserva no existe
-    }
-
-    $reserva = $query->row();
-
-    // 2. Definimos el nuevo estado de forma segura
-    $nuevo_estado = ($reserva->estado_reserva == 'Pendiente') ? 'Confirmada' : 'Pendiente';
-    
-    // 3. Actualizamos el registro
-    $this->db->where('id_reserva', $id);
-    return $this->db->update('reservas', array('estado_reserva' => $nuevo_estado));
-}*/
-
-
 //Verificamos las mesas ocupadas
 public function verificar_mesa_ocupada($fecha, $id_horario, $id_mesa){
     $this->db->where('fecha_reserva', $fecha);
@@ -349,65 +353,6 @@ public function verificar_mesa_ocupada($fecha, $id_horario, $id_mesa){
 }
 
 
-/** Actualiza el estado_reserva 
-public function update_estado_confirmar($id) {
-    $data = array(
-        'estado_reserva' => 'Confirmada' 
-    );
-
-    $this->db->where('id_reserva', $id); 
-    // Asegúrate de que aquí también diga 'reservas'
-    return $this->db->update('reservas', $data);
-}*/
-
-
-/** Cancelacion y activación logica de una reserva
-        function estado_reserva($id, $data){
-        $this->db->where('id_reserva', $id);
-        $query = $this->db->update('reservas', $data);
-        if($query) {
-            return TRUE;
-        } else {
-            return FALSE;
-        }
-    }
-    
-    //cancelacion de recervas
-  public function not_active_reservas() {
-    $this->db->select('*');
-    $this->db->from('reserva'); 
-    
-    // IMPORTANTE: Asegúrate que 'estado_reserva' es el nombre real en tu BD
-    // y que el valor sea el que usas para cancelar (ej: 'Cancelada' o 'Liberada')
-    $this->db->where('estado_reserva', 'Cancelada'); 
-    
-    $query = $this->db->get();
-
-    // Verificación de seguridad para evitar Error 500
-    if ($query && is_object($query) && $query->num_rows() > 0) {
-        return $query->result();
-    }
-    
-    return array(); // Devuelve un array vacío si no hay datos o falla la consulta
-
-
-
-    public function cancelar_reserva($id) {
-    // Definimos los datos a actualizar (ajusta 'estado_reserva' si se llama distinto)
-    $data = array(
-        'estado_reserva' => 'Cancelado' 
-    );
-
-    // Llamamos a la función que ya tienes en tu modelo
-    if ($this->tu_modelo_name->estado_reserva($id, $data)) {
-        // Mensaje de éxito que aparecerá en la pantalla
-        $this->session->set_flashdata('success', 'La reserva se ha cancelado correctamente.');
-    } else {
-        $this->session->set_flashdata('error', 'No se pudo cancelar la reserva.');
-    }
-
-    // Redirigimos de vuelta a la tabla
-    redirect('Coffee/muestraReservas');*/
 
     // =========================================================================
     //              RESERVAS - CONSULTAS POR SP  (SP4 / SP5)
@@ -434,7 +379,7 @@ public function update_estado_confirmar($id) {
      * @param  string $fecha_fin     'YYYY-MM-DD'
      * @return array de objetos
      */
-    public function sp_resumen_reservas($fecha_inicio, $fecha_fin) {
+    public function sp_resumen_reservas_por_estado($fecha_inicio, $fecha_fin) {
         $fi    = $this->db->escape($fecha_inicio);
         $ff    = $this->db->escape($fecha_fin);
         $query = $this->db->query("CALL sp_resumen_reservas_por_estado($fi, $ff)");
