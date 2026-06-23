@@ -56,15 +56,12 @@ $route['ParaAcomp'] = 'Welcome/ParaAcom';
 $route['privacidad'] = 'Welcome/privacidad';
 $route['Condiciones'] = 'Welcome/Condiciones';
 
-//$route['iniciarSesion'] = 'Welcome/iniciarSesion';
+
 $route['registro'] = 'Welcome/registro';
 $route['verifico_nuevoregistro'] = 'registro_controller';
 $route['login'] = 'loginController/login';
 $route['cerrarSesion'] = 'loginController/cerrar_sesion';
 $route['verificoUsuario'] ='loginController';
-
-//$route['usuario'] = 'Welcome/usuario';
-//$route['editar'] = 'Welcome/editar';
 
 
 
@@ -94,9 +91,6 @@ $route['productos_activa/(:num)'] = 'producto_controller/activar_producto/$1';
 $route['cargar_usuario'] = 'registro_controller/form_agrega_usuario';
 $route['verificoUsuario/(:num)'] = 'registro_controller/agrega_usuario/$1';
 $route['usuario_todos'] = 'registro_controller/muestra_usuario';
-
-//$route['modificar_usuarios/(:num)'] = 'registro_controller/muestra_modifica/$1';
-//$route['verifico_modificausuario/(:num)'] = 'registro_controller/modificar_usuario/$1';
 
 $route['usuario_elimina/(:num)'] = 'registro_controller/eliminar_usuario/$1';
 $route['usuarios_eliminados'] = 'registro_controller/muestra_eliminados';
@@ -131,9 +125,6 @@ $route['reporte_ventas'] = 'producto_controller/reporte_ventas';
 **************************************************************************/
 
 $route['muestraReservas'] = 'producto_controller/muestra_reserva';
-//$route['reservasCanceladas'] = 'producto_controller/muestraReservasCanceladas';
-//$route['cancelar_reserva/(:num)'] = 'producto_controller/cancelar_reserva/$1';
-//$route['activar_recerva/(:num)'] = 'producto_controller/activar_reserva/$1';
 $route['reservasConfirmadas'] = 'producto_controller/muestraReservasConfirmadas';
 $route['actualizarEstado/(:num)'] = 'producto_controller/actualizarEstado/$1';
 $route['realizar_reserva'] = 'producto_controller/realizar_reserva';
