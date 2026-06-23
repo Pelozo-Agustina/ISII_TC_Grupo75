@@ -156,7 +156,7 @@ class Reserva_controller extends CI_Controller {
                 }
 
                 $insert_data = array(
-                    'id_usuario'     => $session_data['perfil_id'], 
+                    'id_usuario'     => $session_data['id'], 
                     'fecha_reserva'  => $fecha_seleccionada,
                     'id_mesa'        => $id_mesa,
                     'id_horario'     => $id_horario,

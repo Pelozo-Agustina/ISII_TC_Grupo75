@@ -98,35 +98,6 @@ class Welcome extends CI_Controller {
 		$this-> load->view('partes/footer_view');
 	}
 
-	/*public function usuario()
-	{
-    	$data['titulo']='usuario';
-
-    	$session_data = $this->session->userdata('login_in');
-		$data['perfil_id'] = $session_data['perfil_id'];
-		$data['nombre'] = $session_data['nombre'];
-
-		$data = array('tuitulo' => 'usuario');
-    	$this-> load->view('usuario',$data);
-		$this-> load->view('partes/head_view',$data);
-		$this-> load->view('partes/navbar_view');
-		$this-> load->view('partes/footer_view');
-	}
-
-	public function editar()
-	{
-	    $data['titulo']='editar';
-
-		$session_data = $this->session->userdata('login_in');
-		$data['perfil_id'] = $session_data['perfil_id'];
-		$data['nombre'] = $session_data['nombre'];	 
-
-		$data = array('tuitulo' => 'editar' );
-		$this-> load->view('editar',$data);
-		$this-> load->view('partes/head_view',$data);
-		$this-> load->view('partes/navbar_view');
-		$this-> load->view('partes/footer_view');
-	}*/
 
 	public function registro()
 	{

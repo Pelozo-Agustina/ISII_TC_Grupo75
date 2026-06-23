@@ -141,47 +141,7 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 			}
 		}
 
-		/*function usuario_modifica()
-		{
-			$id = $this->uri->segment(2);
-			$datos_usuarios = $this->usuario_model->edit_usuario($id);
-
-			if ($datos_usuarios != FALSE) {
-				foreach ($datos_usuarios->result() as $row) 
-				{
-					$nombre = $row->nombre;
-					$apellido= $row->apellido;
-					$email= $row->email;
-					$usuario = $row->usuario;
-					$pass = $row->pass;
-				}
-
-				$dat = array('usuarios' =>$datos_usuarios,
-					'id'=>$id,
-					'nombre'=>$nombre,
-					'apellido'=>$apellido,
-					'email'=>$email,
-					'usuario'=>$usuario,
-					'pass'=>$pass,
-				);
-			} 
-			else 
-			{
-				return FALSE;
-			}
-			if($this->_veri_log()){
-			$data = array('titulo' => 'Modificar Usuario');
-			$session_data = $this->session->userdata('login_in');
-			$data['perfil_id'] = $session_data['perfil_id'];
-			$data['nombre'] = $session_data['nombre'];
-
-			$this->load->view('partes/head_view', $data);
-			$this->load->view('partes/navbar_view',$data);
-			$this->load->view('front/modificausuario', $dat);
-			$this->load->view('partes/footer_view');
-			}else{
-			redirect('login', 'refresh');}
-		}*/
+		
 
 		/**
 	    * Muestra para modificar un usuario

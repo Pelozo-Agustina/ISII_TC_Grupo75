@@ -58,7 +58,7 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
             $this->load->view('partes/head_view', $data);
             $this->load->view('partes/navbar_view', $data);
-            $this->load->view('flont/muestraBebidasCalientes', $dat);
+            $this->load->view('front/muestraBebidasCalientes', $dat);
             $this->load->view('partes/footer_view');
             }else{
             redirect('login', 'refresh'); }
@@ -636,29 +636,6 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 }
 
 
-        
-        /**
-        //Muestra Reservas Canceladas
-        function muestraReservasCanceladas()
-        {       
-            if($this->_veri_log()){
-            $data = array('titulo' => 'Reservas Canceladas');
-            $session_data = $this->session->userdata('login_in');
-            $data['perfil_id'] = $session_data['perfil_id'];
-            $data['nombre'] = $session_data['nombre'];
-            
-            $dat = array(
-                'reservas' => $this->producto_model->not_active_reservas()
-            );
-
-            $this->load->view('partes/head_view', $data);
-            $this->load->view('partes/navbar_view');
-            $this->load->view('front/muestraReservasCanceladas', $dat);
-            $this->load->view('partes/footer_view');
-            }else{
-            redirect('login', 'refresh');}
-        } 
-        */
 
         public function confirmarReserva($id) {
     if($this->_veri_log()){
@@ -680,31 +657,6 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
     }
 }
 
-        /**
-        * Obtiene los datos de la reserva cancelada
-        
-        function cancelar_reserva(){
-            $id = $this->uri->segment(2); 
-            $data = array(
-                'estado_id'=>'Pendiente'
-            );
-
-            $this->producto_model->estado_reserva($id, $data);
-            redirect('muestraReservas', 'refresh');
-        }*/
-
-        /**
-        * Obtiene los datos de activar reservas
-        
-        function activar_reserva(){
-            $id = $this->uri->segment(2);
-            $data = array(
-                'estado_id'=>'Confirmada'
-            );
-
-            $this->producto_model->estado_reserva($id, $data);
-            redirect('muestraReservas', 'refresh');
-        }*/
 
         //muestra reservas
         public function get_muestra_reserva() {
@@ -721,26 +673,10 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
          return ($query->num_rows() > 0) ? $query : false;
         }
 
-        //Funcion Realizar reserva
-        /**function realizar_reserva()
-        {
-            if($this->_veri_log()){
-            $data = array('titulo' => 'Hacer Reservas');
         
-            $session_data = $this->session->userdata('login_in');
-            $data['perfil_id'] = $session_data['perfil_id'];
-            $data['nombre'] = $session_data['nombre'];
-
-            $dat = array('reservas' => $this->producto_model->get_muestra_reserva()
-            );
-
-            $this->load->view('partes/head_view', $data);
-            $this->load->view('partes/navbar_view',$data);
-            $this->load->view('front/pagina_reservas', $dat);
-            $this->load->view('partes/footer_view');
-            }else{
-            redirect('login', 'refresh'); }
-        }*/
+       /**************************** 
+        * Funcion Realizar Reserva *
+        ****************************/
         function realizar_reserva()
 {
     date_default_timezone_set('America/Argentina/Buenos_Aires');
