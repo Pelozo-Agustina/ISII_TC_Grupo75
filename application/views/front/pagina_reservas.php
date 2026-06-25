@@ -99,9 +99,9 @@ body {
 /* --- SECCIÓN DE RESERVA MEJORADA --- */
 
 .contenedor-principal-reserva {
-    width: 90%;           /* No ocupa todo el ancho, dejando aire a los lados */
-    max-width: 800px;    /* Ancho máximo para que no se estire de más en PC */
-    margin: 50px auto;    /* CENTRA la tarjeta y le da espacio arriba/abajo */
+    width: 90%;           
+    max-width: 800px;    
+    margin: 50px auto;   
     min-height: 500px;
     
     /* Configuración de fondo para que cubra TODO */
@@ -111,7 +111,7 @@ body {
     
     /* BORDES REDONDEADOS */
     border-radius: 30px;  
-    box-shadow: 0 10px 30px rgba(0,0,0,0.05); /* Sombra suave para que flote */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05); 
     
     display: flex;
     flex-direction: column;
@@ -140,7 +140,7 @@ body {
 /* Tarjeta del formulario */
 .conteiner-form-reserva {
     border-radius: 20px;
-    background-color: rgba(255, 255, 255, 0.95); /* Un toque de transparencia */
+    background-color: rgba(255, 255, 255, 0.95); 
     box-shadow: 0 20px 40px rgba(0,0,0,0.15);
     width: 100%;
     max-width: 450px;
@@ -211,4 +211,6 @@ body {
     
     // Opcional: Establecer por defecto la fecha de hoy
     inputFecha.value = fechaMinima;
+
 </script>
+
