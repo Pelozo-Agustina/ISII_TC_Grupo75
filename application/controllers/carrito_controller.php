@@ -188,17 +188,6 @@ function actualiza_carrito()
                 return; // Corta la ejecución de la función inmediatamente
             }
             
-            /* 
-            NOTA SOBRE EL STOCK: 
-            Para verificar el stock real de tu Base de Datos, aquí deberías consultar tu modelo, por ejemplo:
-            
-            $stock_disponible = $this->Producto_model ->obtener_stock($cart['id']);
-            if ($qty > $stock_disponible) {
-                $this->session->set_flashdata('error_carrito', 'No hay suficiente stock para el producto seleccionado.');
-                header('Location: ' . $_SERVER['HTTP_REFERER']);
-                return;
-            }
-            */
         }
 
         // SEGUNDA PASADA: Si todo está perfecto, procedemos a actualizar el carrito de forma normal

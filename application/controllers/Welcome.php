@@ -20,8 +20,6 @@ class Welcome extends CI_Controller {
 	 */
 	public function index()
 	{
-		//$this->load->view('principal.html');
-		//$data['titulo']='coffe';
 		$data = array('tuitulo' => 'coffee' );
 
 		$session_data = $this->session->userdata('login_in');

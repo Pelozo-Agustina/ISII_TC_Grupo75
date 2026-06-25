@@ -268,7 +268,6 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
             $data['nombre'] = $session_data['nombre'];
 
             $this->load->view('partes/head_view');
-            //$this->load->view('partes/navbar_view');
             $this->load->view('front/modificaproducto', $dat);
             $this->load->view('partes/footer_view');
             }else{

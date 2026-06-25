@@ -31,7 +31,6 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 											'trim|required|xss_clean|is_unique[usuarios.username]');*/
 			$this->form_validation->set_rules('usuario', 'Usuario', 
 											'trim|required|is_unique[usuarios.usuario]');
-			//$this->form_validation->set_rules('password', 'Contraseña','required|xss_clean');
 			$this->form_validation->set_rules('pass', 'Contraseña','required');
 
 			$this->form_validation->set_rules('re_password', 'Repetir contraseña', 'required|matches[pass]');
