@@ -13,7 +13,6 @@ class Usuario_model extends CI_Model{
 		
 	function get_usuarios()
 	{
-		//$this->db->select('id, nombre, apellido, username');
 		$query = $this->db->get('usuarios');
 
 		if($query->num_rows()>0) {
